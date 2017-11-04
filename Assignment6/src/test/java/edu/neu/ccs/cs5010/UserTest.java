@@ -1,4 +1,4 @@
-package edu.neu.ccs.cs5010;
+package test.java.edu.neu.ccs.cs5010;
 
 import org.junit.Test;
 
