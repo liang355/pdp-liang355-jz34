@@ -1,4 +1,4 @@
-package edu.neu.ccs.cs5010;
+package main.java.edu.neu.ccs.cs5010;
 
 import java.util.Arrays;
 
