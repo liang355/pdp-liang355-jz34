@@ -12,6 +12,9 @@ public class User {
   private Set<Integer> followerList = new HashSet<>();
   private Set<Integer> followingList = new HashSet<>();
 
+  //总共被推荐的次数
+  private int beRecommendedTimes = 0;
+
   public User(int nodeID, String dateCreated, String gender, int age, String city) {
     //this.nodeId = nodeID;
     this.dateCreated = dateCreated;
@@ -41,5 +44,13 @@ public class User {
 
   public Set<Integer> getFollowingList() {
     return followingList;
+  }
+
+  public Integer getBeRecommendedTimes() {
+    return beRecommendedTimes;
+  }
+
+  public void setBeRecommendedTimes(int beRecommendedTimes) {
+    this.beRecommendedTimes = beRecommendedTimes;
   }
 }

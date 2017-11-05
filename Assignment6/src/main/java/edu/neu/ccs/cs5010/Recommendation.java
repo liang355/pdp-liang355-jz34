@@ -57,6 +57,7 @@ public class Recommendation {
       for (int currUserFriendId : currFriendUser.getFollowingList()) {
         if (!thisUserFriends.contains(currUserFriendId)) {
           recommendedUsers.add(currUserFriendId);
+          users.get(currUserFriendId).setBeRecommendedTimes(users.get(currUserFriendId).getBeRecommendedTimes()+1);//更新被推荐次数
           currCount++;
           if (currCount == numberOfRecommendations) {
             return;
@@ -89,11 +90,21 @@ public class Recommendation {
     if (currentRecom.size() + currCount > numberOfRecommendations){
       Collections.sort(currentRecom);
       int recomLeft = numberOfRecommendations - currCount;
-      for (int i = 0; i < recomLeft; i++){
-        recommendedUsers.add(currentRecom.remove(0));
+      for (int i = 0; i < recomLeft; i++){//排过序的currentRecom
+        int beRecommendedUser = currentRecom.remove(0);
+        recommendedUsers.add(beRecommendedUser);
+        users.get(beRecommendedUser).setBeRecommendedTimes(users.get(beRecommendedUser).getBeRecommendedTimes()+1);//更新被推荐次数
+        currCount++;
+      }
+    } else { //当前推荐数不够多
+      for (int beRecommendedUser : currentRecom) {//没排过序的currentRecom
+        recommendedUsers.add(beRecommendedUser);
+        users.get(beRecommendedUser).setBeRecommendedTimes(users.get(beRecommendedUser).getBeRecommendedTimes()+1);//更新被推荐次数
         currCount++;
       }
     }
+
+
 
   }
 
@@ -118,6 +129,7 @@ public class Recommendation {
       int userId = userIdsToRecommend.get(i);
       if(!curFollowingList.contains(userId)) {
         this.recommendedUsers.add(userId);
+        this.users.get(userId).setBeRecommendedTimes(users.get(userId).getBeRecommendedTimes()+1);//更新被推荐次数
         this.currCount++;
       }
     }
@@ -140,6 +152,7 @@ public class Recommendation {
         }
       }
       this.recommendedUsers.add(randomId);
+      this.users.get(randomId).setBeRecommendedTimes(users.get(randomId).getBeRecommendedTimes()+1);//更新被推荐次数
       this.currCount++;
     }
   }
