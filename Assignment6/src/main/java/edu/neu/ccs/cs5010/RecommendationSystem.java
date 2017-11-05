@@ -36,7 +36,7 @@ public class RecommendationSystem {
                 return users.get(o2).getRecommendedTimes() - users.get(o1).getRecommendedTimes();
             }
         });
-        System.out.println("Top ten most frequently recommended userIds:");
+        System.out.println("Top ten most frequently recommended userId, frequency");
         for(int i = 0; i < 10; i++) {
             System.out.println(userList.get(i) + ", " + users.get(userList.get(i)).getRecommendedTimes());
         }
@@ -93,5 +93,7 @@ public class RecommendationSystem {
                 "edges_small.csv");
         recommendationSystem.getRecommendationsForUsers('s', 100, 15,
                 "output.csv");
+        // 我把我们两个的部分merge了，现在结果能跑出来了，输出文件叫output.csv
+        // top 10 most frequently recommended, 目前是在得到所有recommendations之后打印一遍，我在PIAZZA上问了明天看回复
     }
 }

@@ -94,7 +94,6 @@ public class Recommendation {
                 currCount++;
             }
         }
-
     }
 
     private void criterionThree(int curUserId) {
