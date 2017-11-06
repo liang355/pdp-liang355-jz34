@@ -37,7 +37,7 @@ public class User {
    * @param otherUserId to be added to the follower list.
    */
   public void addFollower(int otherUserId) {
-    if (otherUserId != 0) { //handle the 0 ????????TODO:check
+    if (otherUserId != 0) {
       this.followerList.add(otherUserId);
     }
 
