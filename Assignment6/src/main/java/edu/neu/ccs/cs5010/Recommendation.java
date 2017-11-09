@@ -69,19 +69,22 @@ public class Recommendation {
       pq.add(users.get(currId)); //sort the current following by that user's friend list size
     }
 
-    while (currCount < numberOfRecommendations && !pq.isEmpty()) {
-      User currFriendUser = pq.poll();
-      for (int currUserFriendId : currFriendUser.getFollowingList()) {
-        if (!thisUserFriends.contains(currUserFriendId)) {
-          recommendedUsers.add(currUserFriendId);
-          currCount++;
-          if (currCount == numberOfRecommendations) {
-            return;
-          }
+    //update on 11/09/17
+    User friendliestFriend = pq.poll();
+
+//    while (currCount < numberOfRecommendations && !pq.isEmpty()) {
+//      //User currFriendUser = pq.poll();
+    for (int currUserFriendId : friendliestFriend.getFollowingList()) {
+      if (!thisUserFriends.contains(currUserFriendId)) {
+        recommendedUsers.add(currUserFriendId);
+        currCount++;
+        if (currCount == numberOfRecommendations) {
+          return;
         }
       }
     }
-  }
+    }
+  //}
 
   /**
    * Criterion Two: Friend of a Friend is a Friend.
