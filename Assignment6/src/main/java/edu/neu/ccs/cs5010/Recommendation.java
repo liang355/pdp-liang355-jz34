@@ -31,8 +31,8 @@ public class Recommendation {
     currCount = 0;
     criterionOne(userId);
     criterionTwo(userId);
-    criterionThree(userId);
-    criterionFour(userId);
+    //criterionThree(userId);
+    //criterionFour(userId);
     return recommendedUsers;
   }
 
@@ -46,10 +46,10 @@ public class Recommendation {
   private void criterionOne(int userId) {
     User currentUser = users.get(userId);
 
-    Calendar thresholdDate = new GregorianCalendar(2017, 10, 1);
+    Calendar thresholdDate = new GregorianCalendar(2017, 9, 1);
     String[] userDateArray = currentUser.getDateCreated().split("/");
     Calendar userDate = new GregorianCalendar(Integer.parseInt(
-        userDateArray[2]), Integer.parseInt(userDateArray[1]), Integer.parseInt(userDateArray[0]));
+        20 + userDateArray[2]), Integer.parseInt(userDateArray[0])-1, Integer.parseInt(userDateArray[1]));
 
     //Newbies check: user's created date is not after Oct 1st.
     if (!userDate.after(thresholdDate)) {
@@ -83,7 +83,7 @@ public class Recommendation {
         }
       }
     }
-    }
+  }
   //}
 
   /**

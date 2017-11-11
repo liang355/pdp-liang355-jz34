@@ -97,6 +97,6 @@ public class User {
   @Override
   public String toString() {
     return String.join(",", dateCreated, gender, String.valueOf(age), city,
-        Arrays.toString(followerList.toArray()), Arrays.toString(followerList.toArray()));
+        Arrays.toString(followingList.toArray()), Arrays.toString(followerList.toArray()));
   }
 }
