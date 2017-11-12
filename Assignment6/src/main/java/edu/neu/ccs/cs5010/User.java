@@ -48,7 +48,9 @@ public class User {
    * @param otherUserId to be added to the following list.
    */
   public void addFollowing(int otherUserId) {
-    this.followingList.add(otherUserId);
+    if (otherUserId != 0) {
+      this.followingList.add(otherUserId);
+    }
   }
 
   /**
