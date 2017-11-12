@@ -28,7 +28,7 @@ public class Recommendation {
    * @return a set of recommended users.
    */
   public Set<Integer> getRecommendation(int userId) {
-    recommendedUsers = new HashSet<>();
+    this.recommendedUsers = new HashSet<>();
     currCount = 0;
     criterionOne(userId);
     criterionTwo(userId);
@@ -173,16 +173,23 @@ public class Recommendation {
     Random random = new Random();
     int remain = numberOfRecommendations - this.currCount;
     Set<Integer> curFollowingList = users.get(curUserId).getFollowingList();
-    for (int i = 0; i < remain; i++) {
+//    System.out.println(users.size());
+//    System.out.println("---> userId: " + curUserId + " <---");
+//    System.out.println("---> remain: " + remain + " <---");
+//    System.out.println("size: " + curFollowingList.size() + ", " + Arrays.toString(curFollowingList.toArray()));
+    for (int i = 0; i < remain && curFollowingList.size() + recommendedUsers.size() < users.size() - 1; i++) {
       int randomId;
       while (true) {
-        randomId = random.nextInt(users.size());
+        randomId = random.nextInt(users.size()) + 1;
         if (!curFollowingList.contains(randomId) && !recommendedUsers.contains(randomId) && randomId != curUserId) {
           break;
         }
       }
       this.recommendedUsers.add(randomId);
+//      System.out.print("[" + randomId + "," + recommendedUsers.size() + "]");
       this.currCount++;
     }
+//    System.out.println();
+//    System.out.println(Arrays.toString(this.recommendedUsers.toArray()));
   }
 }
