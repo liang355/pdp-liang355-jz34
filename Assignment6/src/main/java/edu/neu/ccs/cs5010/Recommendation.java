@@ -123,6 +123,7 @@ public class Recommendation {
       recommendedUsers.addAll(currentRecommendedList);
       currCount = recommendedUsers.size();
     }
+//    System.out.println(currCount);
   }
 
   /**
@@ -174,6 +175,7 @@ public class Recommendation {
 
     Random random = new Random();
     int remain = numberOfRecommendations - this.currCount;
+//    System.out.println("[" + curUserId + ", " + this.currCount + "]");
     Set<Integer> curFollowingList = users.get(curUserId).getFollowingList();
 //    System.out.println(users.size());
 //    System.out.println("---> userId: " + curUserId + " <---");
