@@ -64,31 +64,31 @@ public class User {
    * @return the follower list of this user.
    */
   public Set<Integer> getFollowerList() {
-        return followerList;
-    }
+    return followerList;
+  }
 
   /**
    * Returns the following list of this user.
    * @return the following list of this user.
    */
   public Set<Integer> getFollowingList() {
-        return followingList;
-    }
+    return followingList;
+  }
 
   /**
    * Returns the times of being recommended of this user.
    * @return the times of being recommended of this user.
    */
   public int getRecommendedTimes() {
-        return recommendedTimes;
-    }
+    return recommendedTimes;
+  }
 
   /**
    * Increment the beRecommendedTimes by one.
    */
   public void incrementRecommendedTimes() {
-        this.recommendedTimes++;
-    }
+    this.recommendedTimes++;
+  }
 
   /**
    * Print the user in string.

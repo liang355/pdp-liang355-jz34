@@ -3,8 +3,9 @@ package edu.neu.ccs.cs5010;
 import java.util.Arrays;
 
 /**
- * InputParser validate the input arguments and extract node file name, edge file name, and output file name.
- * It also extracts processing flag, number of users to process, and number of recommendations if they are given.
+ * InputParser validate the input arguments and extract node file name,
+ * edge file name, and output file name. It also extracts processing flag,
+ * number of users to process, and number of recommendations if they are given.
  */
 public class InputParser {
   private String[] args;
@@ -16,7 +17,7 @@ public class InputParser {
   private int numberOfRecommendations;
 
   /**
-   * Constructor with arguments
+   * Constructor with arguments.
    * @param arguments input arguments
    */
   public InputParser(String[] arguments) {
@@ -26,8 +27,8 @@ public class InputParser {
 
   /**
    * checkArgs validates node file name, edge file name, and output file name.
-   * The default values of processing flag, number of users to process, and number of recommendations
-   * are assigned if they are not given in arguments.
+   * The default values of processing flag, number of users to process,
+   * and number of recommendations are assigned if they are not given in arguments.
    * Appropriate error messages will be generated for invalid arguments.
    */
   public void checkArgs() {
@@ -79,46 +80,46 @@ public class InputParser {
    * @return the node file name.
    */
   public String getNodeFile() {
-        return nodeFile;
-    }
+    return nodeFile;
+  }
 
   /**
    * Returns the edge file name.
    * @return the edge file name.
    */
   public String getEdgeFile() {
-        return edgeFile;
-    }
+    return edgeFile;
+  }
 
   /**
    * Returns the output file name.
    * @return the output file name.
    */
   public String getOutputFile() {
-        return outputFile;
-    }
+    return outputFile;
+  }
 
   /**
    * Returns the processing flag.
    * @return the processing flag.
    */
-    public char getProcessingFlag() {
-        return processingFlag;
-    }
+  public char getProcessingFlag() {
+    return processingFlag;
+  }
 
   /**
    * Returns the number of users to process.
    * @return the number of users to process.
    */
-    public int getNumberOfUsersToProcess() {
-        return numberOfUsersToProcess;
-    }
+  public int getNumberOfUsersToProcess() {
+    return numberOfUsersToProcess;
+  }
 
   /**
    * Returns the number of recommendations.
    * @return the number of recommendations.
    */
-    public int getNumberOfRecommendations() {
-        return numberOfRecommendations;
-    }
+  public int getNumberOfRecommendations() {
+    return numberOfRecommendations;
+  }
 }
