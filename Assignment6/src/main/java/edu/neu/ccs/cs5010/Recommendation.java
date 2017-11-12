@@ -59,7 +59,7 @@ public class Recommendation {
     }
 
     //pq sorted in descending order by following list size
-    PriorityQueue<User> pq = new PriorityQueue<>(new Comparator<User>() {
+    PriorityQueue<User> priorityQ = new PriorityQueue<>(new Comparator<User>() {
       @Override
       public int compare(User user1, User user2) {
         return user2.getFollowingList().size() - user1.getFollowingList().size();
@@ -68,11 +68,11 @@ public class Recommendation {
 
     Set<Integer> thisUserFriends = currentUser.getFollowingList();  //this user's friends set
     for (int currId : thisUserFriends) { //add every followings of this user to the pq
-      pq.add(users.get(currId)); //sort the current following by that user's friend list size
+      priorityQ.add(users.get(currId)); //sort the current following by that user's friend list size
     }
 
     //update on 11/09/17
-    User friendliestFriend = pq.poll();
+    User friendliestFriend = priorityQ.poll();
 
     for (int currUserFriendId : friendliestFriend.getFollowingList()) {
       if (!thisUserFriends.contains(currUserFriendId)) {
