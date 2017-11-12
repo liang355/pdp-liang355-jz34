@@ -6,7 +6,7 @@ import static org.junit.Assert.*;
 
 public class InputParserTest {
   @Test
-  public void checkArgs() throws Exception{
+  public void checkArgs() throws Exception {
   }
 
   @Test
