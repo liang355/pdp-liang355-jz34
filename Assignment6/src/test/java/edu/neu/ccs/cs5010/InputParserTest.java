@@ -7,12 +7,34 @@ import static org.junit.Assert.*;
 
 public class InputParserTest {
   private InputParser test0;
-  private String[] args = new String[]{"nodes_small.csv","edges_small.csv", "output.csv", "s", "100", "15"};
+  private InputParser test1;
+  private InputParser test2;
+  private InputParser test3;
+  private InputParser test4;
+  private InputParser test5;
+
+
+  private String[] args0 = new String[]{"nodes_small.csv","edges_small.csv", "output.csv", "s", "100", "15"};
+  private String[] args1 = new String[]{};
+  private String[] args2 = new String[]{"a","a","a"};
+  private String[] args3 = new String[]{"nodes_small.csv","edges_small.csv", "output.csv"};
+  private String[] args4 = new String[]{"nodes_small.csv","edges_small.csv", "output.csv", "s"};
+  private String[] args5 = new String[]{"nodes_small.csv","edges_small.csv", "output.csv", "s", "100"};
 
   @Before
   public void setUp() throws Exception {
-    test0 = new InputParser(args);
+    test0 = new InputParser(args0);
+    test1 = new InputParser(args1);
+    test2 = new InputParser(args2);
+    test3 = new InputParser(args3);
+    test4 = new InputParser(args4);
+    test5 = new InputParser(args5);
     test0.checkArgs();
+    test1.checkArgs();
+    test2.checkArgs();
+    test3.checkArgs();
+    test4.checkArgs();
+    test5.checkArgs();
   }
 
   @Test
