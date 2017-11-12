@@ -185,7 +185,6 @@ public class Recommendation {
         }
       }
       this.recommendedUsers.add(randomId);
-//      System.out.print("[" + randomId + "," + recommendedUsers.size() + "]");
       this.currCount++;
     }
 //    System.out.println();
