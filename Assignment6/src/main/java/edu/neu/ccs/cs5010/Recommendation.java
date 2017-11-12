@@ -175,12 +175,7 @@ public class Recommendation {
 
     Random random = new Random();
     int remain = numberOfRecommendations - this.currCount;
-//    System.out.println("[" + curUserId + ", " + this.currCount + "]");
     Set<Integer> curFollowingList = users.get(curUserId).getFollowingList();
-//    System.out.println(users.size());
-//    System.out.println("---> userId: " + curUserId + " <---");
-//    System.out.println("---> remain: " + remain + " <---");
-//    System.out.println("size: " + curFollowingList.size() + ", " + Arrays.toString(curFollowingList.toArray()));
     for (int i = 0; i < remain && curFollowingList.size() + recommendedUsers.size() < users.size() - 1; i++) {
       int randomId;
       while (true) {
