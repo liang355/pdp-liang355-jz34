@@ -1,21 +1,25 @@
 package edu.neu.ccs.cs5010;
 
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * ReadWriteCSV reads data from given file, and writes csv file as output.
+ * ReadWriteCsv reads data from given file, and writes csv file as output.
  */
-public class ReadWriteCSV {
+public class ReadWriteCsv {
 
   /**
    * Writes the given string into given csv file.
    * @param str string to be written in the output file.
    * @param outputFileName output file name.
    */
-  public void printStringToCSV(String str, String outputFileName) {
+  public void printStringToCsv(String str, String outputFileName) {
     try {
       PrintWriter out = new PrintWriter(outputFileName);
       out.print(str);
@@ -27,16 +31,16 @@ public class ReadWriteCSV {
   }
 
   /**
-   * readLinesFromCSV reads the data from the given file name and returns a the data in list format.
-   * @param CSVFileName file source name
+   * readLinesFromCsv reads the data from the given file name and returns a the data in list format.
+   * @param csvFileName file source name
    * @return list representation of the csv file content.
    */
-  public List<String> readLinesFromCSV(String CSVFileName) {
-    String CSVFilePathName = CSVFileName;
+  public List<String> readLinesFromCsv(String csvFileName) {
+    String csvFilePathName = csvFileName;
     List<String> lines = new ArrayList<>();
     BufferedReader inputFile = null;
     try {
-      inputFile = new BufferedReader(new FileReader(CSVFilePathName));
+      inputFile = new BufferedReader(new FileReader(csvFilePathName));
       String line;
       inputFile.readLine(); // skip first line
       while ((line = inputFile.readLine()) != null) {
