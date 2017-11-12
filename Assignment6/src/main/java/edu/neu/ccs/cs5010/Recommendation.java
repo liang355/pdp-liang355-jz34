@@ -29,9 +29,9 @@ public class Recommendation {
   public Set<Integer> getRecommendation(int userId) {
     this.recommendedUsers = new HashSet<>();
     currCount = 0;
-//    criterionOne(userId);
+    criterionOne(userId);
     criterionTwo(userId);
-//    criterionThree(userId);
+    criterionThree(userId);
     criterionFour(userId);
     return recommendedUsers;
   }
