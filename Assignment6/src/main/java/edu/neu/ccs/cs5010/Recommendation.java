@@ -30,9 +30,9 @@ public class Recommendation {
   public Set<Integer> getRecommendation(int userId) {
     this.recommendedUsers = new HashSet<>();
     currCount = 0;
-    criterionOne(userId);
+//    criterionOne(userId);
     criterionTwo(userId);
-    criterionThree(userId);
+//    criterionThree(userId);
     criterionFour(userId);
     return this.recommendedUsers;
   }
@@ -116,12 +116,13 @@ public class Recommendation {
       int recommendNumLeft = numberOfRecommendations - currCount;
       for (int i = 0; i < recommendNumLeft; i++) {
         recommendedUsers.add(currentRecommendedList.remove(0));
-        currCount++;
       }
+      currCount = recommendedUsers.size();
     } else { //if current recommendation number is not larger, add all of them to the recommendedList and update the currCount
       recommendedUsers.addAll(currentRecommendedList);
-      currCount += recommendedUsers.size();
+      currCount = recommendedUsers.size();
     }
+//    System.out.println(currCount);
   }
 
   /**
@@ -172,11 +173,12 @@ public class Recommendation {
     }
     Random random = new Random();
     int remain = numberOfRecommendations - this.currCount;
+    System.out.println("[" + curUserId + ", " + this.currCount + "]");
     Set<Integer> curFollowingList = users.get(curUserId).getFollowingList();
-    System.out.println(users.size());
-    System.out.println("---> userId: " + curUserId + " <---");
-    System.out.println("---> remain: " + remain + " <---");
-    System.out.println("size: " + curFollowingList.size() + ", " + Arrays.toString(curFollowingList.toArray()));
+//    System.out.println(users.size());
+//    System.out.println("---> userId: " + curUserId + " <---");
+//    System.out.println("---> remain: " + remain + " <---");
+//    System.out.println("size: " + curFollowingList.size() + ", " + Arrays.toString(curFollowingList.toArray()));
     for (int i = 0; i < remain && curFollowingList.size() + recommendedUsers.size() < users.size() - 1; i++) {
       int randomId;
       while (true) {
@@ -186,10 +188,10 @@ public class Recommendation {
         }
       }
       this.recommendedUsers.add(randomId);
-      System.out.print("[" + randomId + "," + recommendedUsers.size() + "]");
+//      System.out.print("[" + randomId + "," + recommendedUsers.size() + "]");
       this.currCount++;
     }
-    System.out.println();
-    System.out.println(Arrays.toString(this.recommendedUsers.toArray()));
+//    System.out.println();
+//    System.out.println(Arrays.toString(this.recommendedUsers.toArray()));
   }
 }
