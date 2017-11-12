@@ -1,5 +1,6 @@
 package main.java.edu.neu.ccs.cs5010;
 
+import java.lang.reflect.Array;
 import java.util.*;
 
 /**
@@ -31,7 +32,7 @@ public class Recommendation {
     currCount = 0;
     criterionOne(userId);
     criterionTwo(userId);
-    //criterionThree(userId);
+    criterionThree(userId);
     //criterionFour(userId);
     return recommendedUsers;
   }
