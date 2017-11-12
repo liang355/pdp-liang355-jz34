@@ -33,7 +33,7 @@ public class Recommendation {
     criterionOne(userId);
     criterionTwo(userId);
     criterionThree(userId);
-    //criterionFour(userId);
+    criterionFour(userId);
     return recommendedUsers;
   }
 
