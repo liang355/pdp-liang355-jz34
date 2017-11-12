@@ -13,6 +13,7 @@ import java.util.List;
  * ReadWriteCsv reads data from given file, and writes csv file as output.
  */
 public class ReadWriteCsv {
+  private boolean fileNotFoundExceptionCaught = false;
 
   /**
    * Writes the given string into given csv file.
@@ -27,6 +28,7 @@ public class ReadWriteCsv {
     } catch (FileNotFoundException fnfe) {
       System.out.println("*** OOPS! A file was not found : " + fnfe.getMessage());
       fnfe.printStackTrace();
+      fileNotFoundExceptionCaught = true;
     }
   }
 
@@ -49,6 +51,7 @@ public class ReadWriteCsv {
     } catch (FileNotFoundException fnfe) {
       System.out.println("*** OOPS! A file was not found : " + fnfe.getMessage());
       fnfe.printStackTrace();
+      fileNotFoundExceptionCaught = true;
     } catch (IOException ioe) {
       System.out.println("Something went wrong! : " + ioe.getMessage());
       ioe.printStackTrace();
@@ -63,5 +66,9 @@ public class ReadWriteCsv {
       }
     }
     return lines;
+  }
+
+  public boolean isFileNotFoundExceptionCaught() {
+    return fileNotFoundExceptionCaught;
   }
 }

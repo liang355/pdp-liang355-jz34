@@ -9,6 +9,7 @@ import java.util.*;
 public class RecommendationSystem {
   private Map<Integer, User> users = new HashMap<>();
   private ReadWriteCsv readWriteCsv = new ReadWriteCsv();
+  private String outputString = "";
 
   /**
    * Constructor with node file name and edge file name.
@@ -140,7 +141,12 @@ public class RecommendationSystem {
       }
     }
     String stringToPrint = fsb.toString();  //finish build
+    outputString = stringToPrint;
     readWriteCsv.printStringToCsv(stringToPrint, outputFileName);
     printTopRecommendUserIds();
+  }
+
+  public String getOutputString() {
+    return outputString;
   }
 }
