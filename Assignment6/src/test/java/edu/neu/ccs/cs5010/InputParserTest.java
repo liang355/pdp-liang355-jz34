@@ -12,7 +12,8 @@ public class InputParserTest {
   private InputParser test3;
   private InputParser test4;
   private InputParser test5;
-
+  private InputParser test6;
+  private InputParser test7;
 
   private String[] args0 = new String[]{"nodes_small.csv","edges_small.csv", "output.csv", "s", "100", "15"};
   private String[] args1 = new String[]{};
@@ -20,6 +21,8 @@ public class InputParserTest {
   private String[] args3 = new String[]{"nodes_small.csv","edges_small.csv", "output.csv"};
   private String[] args4 = new String[]{"nodes_small.csv","edges_small.csv", "output.csv", "s"};
   private String[] args5 = new String[]{"nodes_small.csv","edges_small.csv", "output.csv", "s", "100"};
+  private String[] args6 = new String[]{"a.csv","a","a"};
+  private String[] args7 = new String[]{"a.csv","a.csv","a"};
 
   @Before
   public void setUp() throws Exception {
@@ -29,12 +32,17 @@ public class InputParserTest {
     test3 = new InputParser(args3);
     test4 = new InputParser(args4);
     test5 = new InputParser(args5);
+    test6 = new InputParser(args6);
+    test7 = new InputParser(args7);
+
     test0.checkArgs();
     test1.checkArgs();
     test2.checkArgs();
     test3.checkArgs();
     test4.checkArgs();
     test5.checkArgs();
+    test6.checkArgs();
+    test7.checkArgs();
   }
 
   @Test
