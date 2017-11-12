@@ -130,7 +130,7 @@ public class RecommendationSystem {
     } else if (flag == 'r') { //process in random order
       List<Integer> list = new ArrayList<>(users.keySet());
       Collections.shuffle(list);
-      for (int i = 0; i < numberOfUsersToProcess; i++) {
+      for (int i = 1; i <= numberOfUsersToProcess; i++) {
         appendCurLineToPrint(i, recommendation, fsb);
       }
     }
