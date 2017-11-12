@@ -66,7 +66,7 @@ public class InputParser {
       return;
     }
 
-    //try to get third optional argument numberOfRecommendations
+    //try to get third optional argument  numberOfRecommendations
     try {
       numberOfRecommendations = Integer.parseInt(args[5]);
     } catch (IndexOutOfBoundsException error) {
@@ -121,7 +121,4 @@ public class InputParser {
     public int getNumberOfRecommendations() {
         return numberOfRecommendations;
     }
-
-
-
 }

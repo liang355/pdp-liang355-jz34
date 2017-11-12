@@ -135,7 +135,6 @@ public class RecommendationSystem {
       }
     }
     String stringToPrint = fsb.toString();  //finish build
-    //System.out.println(stringToPrint);
     readWriteCSV.printStringToCSV(stringToPrint, outputFileName);
     printTopRecommendUserIds();
   }

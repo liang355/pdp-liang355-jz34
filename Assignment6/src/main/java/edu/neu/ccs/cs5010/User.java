@@ -91,7 +91,7 @@ public class User {
     }
 
   /**
-   * Represent the user in string.
+   * Print the user in string.
    * @return string representation of the user.
    */
   @Override
