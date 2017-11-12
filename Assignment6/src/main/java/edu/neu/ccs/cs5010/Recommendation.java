@@ -1,5 +1,6 @@
 package main.java.edu.neu.ccs.cs5010;
 
+import java.lang.reflect.Array;
 import java.util.*;
 
 /**
@@ -29,11 +30,10 @@ public class Recommendation {
   public Set<Integer> getRecommendation(int userId) {
     this.recommendedUsers = new HashSet<>();
     currCount = 0;
-//    criterionOne(userId);
-//    criterionTwo(userId);
-//    criterionThree(userId);
+    criterionOne(userId);
+    criterionTwo(userId);
+    criterionThree(userId);
     criterionFour(userId);
-//    System.out.println(Arrays.toString(recommendedUsers.toArray()));
     return this.recommendedUsers;
   }
 
@@ -47,10 +47,10 @@ public class Recommendation {
   private void criterionOne(int userId) {
     User currentUser = users.get(userId);
 
-    Calendar thresholdDate = new GregorianCalendar(2017, 10, 1);
+    Calendar thresholdDate = new GregorianCalendar(2017, 9, 1);
     String[] userDateArray = currentUser.getDateCreated().split("/");
     Calendar userDate = new GregorianCalendar(Integer.parseInt(
-        userDateArray[2]), Integer.parseInt(userDateArray[1]), Integer.parseInt(userDateArray[0]));
+        20 + userDateArray[2]), Integer.parseInt(userDateArray[0])-1, Integer.parseInt(userDateArray[1]));
 
     //Newbies check: user's created date is not after Oct 1st.
     if (!userDate.after(thresholdDate)) {
@@ -84,7 +84,7 @@ public class Recommendation {
         }
       }
     }
-    }
+  }
   //}
 
   /**
