@@ -1,6 +1,5 @@
 package main.java.edu.neu.ccs.cs5010;
 
-import java.lang.reflect.Array;
 import java.util.*;
 
 /**
@@ -34,7 +33,7 @@ public class Recommendation {
     criterionTwo(userId);
 //    criterionThree(userId);
     criterionFour(userId);
-    return this.recommendedUsers;
+    return recommendedUsers;
   }
 
   /**
@@ -84,6 +83,7 @@ public class Recommendation {
         }
       }
     }
+
   }
   //}
 
@@ -110,6 +110,7 @@ public class Recommendation {
         }
       }
     }
+
 
     if (currentRecommendedList.size() + currCount > numberOfRecommendations) { //if current recommended number is too large，sort by id
       Collections.sort(currentRecommendedList);
@@ -171,6 +172,7 @@ public class Recommendation {
     if (this.currCount == numberOfRecommendations) {
       return;
     }
+
     Random random = new Random();
     int remain = numberOfRecommendations - this.currCount;
     System.out.println("[" + curUserId + ", " + this.currCount + "]");
