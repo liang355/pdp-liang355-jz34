@@ -1,6 +1,5 @@
 package main.java.edu.neu.ccs.cs5010;
 
-import java.lang.reflect.Array;
 import java.util.*;
 
 /**
@@ -84,6 +83,7 @@ public class Recommendation {
         }
       }
     }
+
   }
   //}
 
@@ -111,16 +111,17 @@ public class Recommendation {
       }
     }
 
+
     if (currentRecommendedList.size() + currCount > numberOfRecommendations) { //if current recommended number is too large，sort by id
       Collections.sort(currentRecommendedList);
       int recommendNumLeft = numberOfRecommendations - currCount;
       for (int i = 0; i < recommendNumLeft; i++) {
         recommendedUsers.add(currentRecommendedList.remove(0));
-        currCount++;
       }
+      currCount = recommendedUsers.size();
     } else { //if current recommendation number is not larger, add all of them to the recommendedList and update the currCount
       recommendedUsers.addAll(currentRecommendedList);
-      currCount += recommendedUsers.size();
+      currCount = recommendedUsers.size();
     }
   }
 
@@ -170,6 +171,7 @@ public class Recommendation {
     if (this.currCount == numberOfRecommendations) {
       return;
     }
+
     Random random = new Random();
     int remain = numberOfRecommendations - this.currCount;
     Set<Integer> curFollowingList = users.get(curUserId).getFollowingList();
