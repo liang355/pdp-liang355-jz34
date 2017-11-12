@@ -1,4 +1,4 @@
-package main.java.edu.neu.ccs.cs5010;
+package edu.neu.ccs.cs5010;
 
 import java.util.*;
 
@@ -24,19 +24,19 @@ public class RecommendationSystem {
    * @param args input arguments.
    */
   public static void main(String[] args) {
-    /* ****** 晚点用这个，在edit configuration里改input arguments ******
     InputParser inputParser = new InputParser(args);
     inputParser.checkArgs();
+
     RecommendationSystem recommendationSystem = new RecommendationSystem(inputParser.getNodeFile(),
         inputParser.getEdgeFile());
     recommendationSystem.getRecommendationsForUsers(inputParser.getProcessingFlag(),
         inputParser.getNumberOfUsersToProcess(),inputParser.getNumberOfRecommendations(),inputParser.getOutputFile());
-     */
 
-    RecommendationSystem recommendationSystem = new RecommendationSystem("nodes_small.csv",
-        "edges_small.csv");
-    recommendationSystem.getRecommendationsForUsers('s', 100, 15,
-        "output.csv");
+
+//    RecommendationSystem recommendationSystem = new RecommendationSystem("nodes_small.csv",
+//        "edges_small.csv");
+//    recommendationSystem.getRecommendationsForUsers('s', 100, 15,
+//        "output.csv");
   }
 
   /**

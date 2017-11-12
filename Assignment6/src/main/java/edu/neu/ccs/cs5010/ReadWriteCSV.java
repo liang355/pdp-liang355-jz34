@@ -1,4 +1,4 @@
-package main.java.edu.neu.ccs.cs5010;
+package edu.neu.ccs.cs5010;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -31,7 +31,7 @@ public class ReadWriteCSV {
    * @return list representation of the csv file content.
    */
   public List<String> readLinesFromCSV(String CSVFileName) {
-    String CSVFilePathName = "Assignment6/" + CSVFileName;
+    String CSVFilePathName = CSVFileName;
     List<String> lines = new ArrayList<>();
     BufferedReader inputFile = null;
     try {
