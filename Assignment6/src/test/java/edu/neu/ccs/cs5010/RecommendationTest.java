@@ -10,11 +10,12 @@ public class RecommendationTest {
 
     @Before
     public void setUp() {
+
     }
 
     @Test
     public void getRecommendation() throws Exception {
-        
+
     }
 
 }
