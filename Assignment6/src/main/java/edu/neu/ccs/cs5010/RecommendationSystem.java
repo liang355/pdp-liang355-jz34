@@ -9,7 +9,7 @@ import java.util.*;
 public class RecommendationSystem {
   private Map<Integer, User> users = new HashMap<>();
   private ReadWriteCsv readWriteCsv = new ReadWriteCsv();
-  private String outputString = "";
+  private String recommendationString = "";
 
   /**
    * Constructor with node file name and edge file name.
@@ -19,6 +19,9 @@ public class RecommendationSystem {
   public RecommendationSystem(String nodeFile, String edgeFile) {
     readNodesFromCsv(nodeFile);
     readEdgesFromCsv(edgeFile);
+//    for(int i = 1; i <= 10000; i++) {
+//      System.out.println(i + "," +users.get(i));
+//    }
   }
 
   /**
@@ -34,12 +37,6 @@ public class RecommendationSystem {
     recommendationSystem.getRecommendationsForUsers(inputParser.getProcessingFlag(),
         inputParser.getNumberOfUsersToProcess(),inputParser.getNumberOfRecommendations(),
             inputParser.getOutputFile());
-
-
-//    RecommendationSystem recommendationSystem = new RecommendationSystem("nodes_small.csv",
-//        "edges_small.csv");
-//    recommendationSystem.getRecommendationsForUsers('s', 100, 15,
-//        "output.csv");
   }
 
   /**
@@ -48,12 +45,14 @@ public class RecommendationSystem {
    * @param csvFileName node file name.
    */
   private void readNodesFromCsv(String csvFileName) {
-    List<String> lines = this.readWriteCsv.readLinesFromCsv(csvFileName);
+    List<String> lines = readWriteCsv.readLinesFromCsv(csvFileName);
     for (String line : lines) {
+//      System.out.println(line);
       String[] params = line.split(",");
       users.put(Integer.valueOf(params[0]),
           new User(params[1], params[2], Integer.valueOf(params[3]), params[4]));
     }
+
   }
 
   /**
@@ -63,7 +62,7 @@ public class RecommendationSystem {
    * @param csvFileName edge file name.
    */
   private void readEdgesFromCsv(String csvFileName) {
-    List<String> lines = this.readWriteCsv.readLinesFromCsv(csvFileName);
+    List<String> lines = readWriteCsv.readLinesFromCsv(csvFileName);
     for (String line : lines) {
       String[] params = line.split(",");
       int sourceId = Integer.valueOf(params[0]);
@@ -141,12 +140,12 @@ public class RecommendationSystem {
       }
     }
     String stringToPrint = fsb.toString();  //finish build
-    outputString = stringToPrint;
+    recommendationString = stringToPrint;
     readWriteCsv.printStringToCsv(stringToPrint, outputFileName);
     printTopRecommendUserIds();
   }
 
-  public String getOutputString() {
-    return outputString;
+  public String getRecommendationString() {
+    return recommendationString;
   }
 }

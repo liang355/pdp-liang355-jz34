@@ -46,6 +46,7 @@ public class Recommendation {
    */
   private void criterionOne(int userId) {
     User currentUser = users.get(userId);
+//    System.out.println(currentUser.toString());
 
     Calendar thresholdDate = new GregorianCalendar(2017, 9, 1);
     String[] userDateArray = currentUser.getDateCreated().split("/");
@@ -67,6 +68,9 @@ public class Recommendation {
     });
 
     Set<Integer> thisUserFriends = currentUser.getFollowingList();  //this user's friends set
+    if(thisUserFriends.isEmpty()) {
+      return;
+    }
     for (int currId : thisUserFriends) { //add every followings of this user to the pq
       priorityQ.add(users.get(currId)); //sort the current following by that user's friend list size
     }
