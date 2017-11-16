@@ -9,27 +9,12 @@ public class ConcurrentSolution {
   private Queue<String> liftQueue; // <liftID>
   private Queue<String> hourQueue; //<hour number(1-6), liftID>
 
-  private Map<String,Integer> skierVertical = new HashMap<>(); //key: SkierID;  value: total vertical
-  private Map<String,Integer> liftRides = new HashMap<>(); //key: liftID;  value: total number of rides
-  private Map<Integer,Map<String,Integer>> hourRides = new HashMap<>(); //key: liftId;  value: liftID -> number of rides in this hour
-
   public ConcurrentSolution() {
     readWriteCsv.readForConcurrent();
     skierQueue = readWriteCsv.getSkierQueue();
     liftQueue = readWriteCsv.getLiftQueue();
     hourQueue = readWriteCsv.getHourQueue();
   }
-
-////  public static void main(String[] args) {
-////    ConcurrentSolution test1 = new ConcurrentSolution();
-////    long startTime = System.currentTimeMillis();
-////    test1.runConcurrent();
-////    long endTime = System.currentTimeMillis();
-////    long duration = endTime - startTime;
-////    System.out.println("Execution Time of Concurrent Solution: " + duration + " ms.");
-//
-//
-//  }
 
   public void runConcurrent() {
     SkierThread runSkier = new SkierThread(skierQueue);

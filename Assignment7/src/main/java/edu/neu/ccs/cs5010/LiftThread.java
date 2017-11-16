@@ -6,8 +6,8 @@ import java.util.Queue;
 
 public class LiftThread extends Thread {
   private Queue<String> liftQueue; // <liftID>
-  private ReadWriteCsv readWriteCsv = new ReadWriteCsv();
   private Map<String,Integer> liftRides = new HashMap<>(); //key: liftID;  value: total number of rides
+  private CommonBuilderWriter commonBw = new CommonBuilderWriter();
 
   public LiftThread(Queue<String> liftQueue) {
     this.liftQueue = liftQueue;
@@ -19,12 +19,6 @@ public class LiftThread extends Thread {
       liftRides.put(currLiftId, liftRides.getOrDefault(currLiftId,0) + 1); //update the number of ride of current lift
     }
 
-    StringBuilder liftSb = new StringBuilder("LiftID,Number of Rides\n");
-    for (int i = 1; i <= 40; i++) { //all 40 lifts
-      String liftId = String.valueOf(i);
-      liftSb.append(i + "," + liftRides.getOrDefault(liftId,0) + "\n");
-    }
-
-    readWriteCsv.printStringToCsv(liftSb.toString(),"concurrent results/lifts.csv");
+    commonBw.liftBuildWrite(liftRides,"concurrent results/lifts.csv");
   }
 }
