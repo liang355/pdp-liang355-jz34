@@ -19,21 +19,21 @@ public class ReadWriteCsv {
   private Queue<String> liftQueue = new LinkedList<>(); // <liftID>
   private Queue<String> hourQueue = new LinkedList<>(); //<hour number(1-6), liftID>
 
-  // main method is only for test the reading time for two solutions
-  public static void main(String[] args) {
-    ReadWriteCsv test = new ReadWriteCsv();
-    long s1 = System.currentTimeMillis();
-    test.readForSequential();
-    long e1 = System.currentTimeMillis();
-    long r1 = e1 - s1;
-    System.out.println(r1);
-
-    long s2 = System.currentTimeMillis();
-    test.readForConcurrent();
-    long e2 = System.currentTimeMillis();
-    long r2 = e2 - s2;
-    System.out.println(r2);
-  }
+//  // main method is only for test the reading time for two solutions
+//  public static void main(String[] args) {
+//    ReadWriteCsv test = new ReadWriteCsv();
+//    long s1 = System.currentTimeMillis();
+//    test.readForSequential();
+//    long e1 = System.currentTimeMillis();
+//    long r1 = e1 - s1;
+//    System.out.println(r1);
+//
+//    long s2 = System.currentTimeMillis();
+//    test.readForConcurrent();
+//    long e2 = System.currentTimeMillis();
+//    long r2 = e2 - s2;
+//    System.out.println(r2);
+//  }
 
   public void readForSequential() {
     CsvParserSettings settings = new CsvParserSettings();
