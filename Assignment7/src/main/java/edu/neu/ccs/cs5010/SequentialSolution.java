@@ -14,15 +14,14 @@ public class SequentialSolution {
     allRows = readWriteCsv.getAllRows();
   }
 
-  public static void main(String[] args) {
-    SequentialSolution ss = new SequentialSolution();
+  public void runSequential() {
     long startTime = System.currentTimeMillis();
-    ss.skierResult();
-    ss.liftResult();
-    ss.hourResult();
+    skierResult();
+    liftResult();
+    hourResult();
     long endTime = System.currentTimeMillis();
     long duration = endTime - startTime;
-    System.out.println("Execution Time of Sequential Solution: " + duration + " ms.");
+    System.out.println("Sequential Solution Runtime: " + duration + " ms.");
   }
 
   public void skierResult() {
