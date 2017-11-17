@@ -2,6 +2,9 @@ package edu.neu.ccs.cs5010;
 
 import java.util.*;
 
+/**
+ * Sequential solution that reads data from given file and generate desired output files.
+ */
 public class SequentialSolution {
   private ReadWriteCsv readWriteCsv = new ReadWriteCsv();
   private CommonBuilderWriter commonBw = new CommonBuilderWriter();
@@ -10,11 +13,17 @@ public class SequentialSolution {
   private Map<String,Integer> liftRides = new HashMap<>(); //key: liftID;  value: total number of rides
   private Map<Integer,Map<String,Integer>> hourRides = new HashMap<>(); //key: liftId;  value: liftID -> number of rides in this hour
 
+  /**
+   * Constructs a new SequentialSolution and initialize allRows, a string array list.
+   */
   public SequentialSolution() {
     readWriteCsv.readForSequential();
     allRows = readWriteCsv.getAllRows();
   }
 
+  /**
+   * Run the single-thread solution.
+   */
   public void runSequential() {
     long startTime = System.currentTimeMillis();
     skierResult();
@@ -25,6 +34,9 @@ public class SequentialSolution {
     System.out.println("Sequential Solution Runtime: " + duration + " ms.");
   }
 
+  /**
+   * finds the skiers with the Top 100 vertical totals in descending order.
+   */
   public void skierResult() {
     for (int i = 1; i < allRows.size(); i++) { //starting from 1 to avoid the header line
       String skierId = allRows.get(i)[2];
@@ -36,6 +48,9 @@ public class SequentialSolution {
     commonBw.skierBuildWrite(skierVertical, "sequential results/skier.csv");
   }
 
+  /**
+   * finds the ride number of each liftId.
+   */
   public void liftResult() {
     for (int i = 1; i < allRows.size(); i++) {
       String liftId = allRows.get(i)[3];
@@ -45,6 +60,9 @@ public class SequentialSolution {
     commonBw.liftBuildWrite(liftRides,"sequential results/lifts.csv");
   }
 
+  /**
+   * finds the top 10 busiest lifts for each section of hour.
+   */
   public void hourResult() {
     for (int i = 1; i <= 6; i++) { // initialize the hourRides with six hour sections
       hourRides.put(i,new HashMap<>());

@@ -4,6 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Queue;
 
+/**
+ * SkierThread is a thread finds the skiers with the Top 100 vertical totals in descending order.
+ */
 public class SkierThread extends Thread{
   private Queue<String> skierQueue; // KV pair: <skierID,liftID>
   private Map<String,Integer> skierVertical = new HashMap<>(); //key: SkierID;  value: total vertical
@@ -13,6 +16,9 @@ public class SkierThread extends Thread{
     this.skierQueue = skierQueue;
   }
 
+  /**
+   * run method of this thread.
+   */
   public void run() {
     while (!skierQueue.isEmpty()) {
       String[] currPair = skierQueue.poll().split(",");

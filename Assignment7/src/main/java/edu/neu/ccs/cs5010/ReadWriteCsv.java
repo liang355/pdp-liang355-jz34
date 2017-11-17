@@ -10,6 +10,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
+/**
+ * ReadWriteCsv reads and writes csv files.
+ */
 public class ReadWriteCsv {
   //for sequential solution
   private List<String[]> allRows;
@@ -19,8 +22,7 @@ public class ReadWriteCsv {
   private Queue<String> liftQueue = new LinkedList<>(); // <liftID>
   private Queue<String> hourQueue = new LinkedList<>(); //<hour number(1-6), liftID>
 
-//  // main method is only for test the reading time for two solutions
-//  public static void main(String[] args) {
+//  *********** only for test of running time of parser/read *************
 //    ReadWriteCsv test = new ReadWriteCsv();
 //    long s1 = System.currentTimeMillis();
 //    test.readForSequential();
@@ -35,12 +37,20 @@ public class ReadWriteCsv {
 //    System.out.println(r2);
 //  }
 
+  /**
+   * readForSequential reads the data from the given file and builds a string
+   * array list for single-thread solution.
+   */
   public void readForSequential() {
     CsvParserSettings settings = new CsvParserSettings();
     CsvParser parser = new CsvParser(settings);
     allRows = parser.parseAll(new File("PDPAssignment.csv"));
   }
 
+  /**
+   * readForConcurrent reads the data from the given file and builds three queues
+   * for multithreading solution.
+   */
   public void readForConcurrent() {
     CsvParserSettings settings = new CsvParserSettings();
     CsvParser parser = new CsvParser(settings);
@@ -60,6 +70,11 @@ public class ReadWriteCsv {
     }
   }
 
+  /**
+   * Writes the given string into given csv file.
+   * @param str string to be written in the output file.
+   * @param outputFileName output file name.
+   */
   public void printStringToCsv(String str, String outputFileName) {
     try {
       PrintWriter out = new PrintWriter(outputFileName);
@@ -70,18 +85,35 @@ public class ReadWriteCsv {
     }
   }
 
+  /**
+   * Getter method of the allRows.
+   * @return a string array list that contains all the data of the given file.
+   */
   public List<String[]> getAllRows() {
     return allRows;
   }
 
+  /**
+   * Getter method of the skierQueue.
+   * @return a Queue contains KV pair, namely "skierID, liftID";
+   */
   public Queue<String> getSkierQueue() {
     return skierQueue;
   }
 
+  /**
+   * Getter method of the liftQueue.
+   * @return a Queue contains a record for every lift ride.
+   */
   public Queue<String> getLiftQueue() {
     return liftQueue;
   }
 
+  /**
+   * Getter method of the hourQueue.
+   * @return a Queue contains a record for every lift ride in each hour,
+   * namely "hour number(1-6), liftID".
+   */
   public Queue<String> getHourQueue() {
     return hourQueue;
   }

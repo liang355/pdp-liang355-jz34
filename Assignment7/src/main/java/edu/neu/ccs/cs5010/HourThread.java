@@ -4,6 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Queue;
 
+/**
+ * HourThread is a thread finds the top 10 busiest lifts for each section of hour.
+ */
 public class HourThread extends Thread{
   private Queue<String> hourQueue; //<hour number(1-6), liftID>
   private Map<Integer,Map<String,Integer>> hourRides = new HashMap<>(); //key: liftId;  value: liftID -> number of rides in this hour
@@ -13,6 +16,9 @@ public class HourThread extends Thread{
     this.hourQueue = hourQueue;
   }
 
+  /**
+   * run method of this thread.
+   */
   public void run(){
     for (int i = 1; i <= 6; i++) { // initialize the hourRides with six hour sections
       hourRides.put(i,new HashMap<>());

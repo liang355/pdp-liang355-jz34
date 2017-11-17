@@ -4,9 +4,18 @@ import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
+/**
+ * CommonBuilderWriter contains all the common methods shared by consequential and concurrent solutions.
+ */
 public class CommonBuilderWriter {
   private ReadWriteCsv readWriteCsv = new ReadWriteCsv();
 
+  /**
+   * skierBuildWrite sorts the skierIds by their total vertical rise in descending order
+   * and write them in designated output file.
+   * @param skierVertical Map contains skierId as key and its vertical distance as value.
+   * @param fileName output file name.
+   */
   public void skierBuildWrite(Map<String,Integer> skierVertical, String fileName) {
     Queue<Map.Entry<String,Integer>> maxHeap = new PriorityQueue<>( //maxHeap sort the map by value in descending order
         (object1, object2) -> object2.getValue() - object1.getValue()
@@ -23,6 +32,11 @@ public class CommonBuilderWriter {
     readWriteCsv.printStringToCsv(skierSb.toString(),fileName);
   }
 
+  /**
+   * Helper method for skierBuildWrite that finds the vertical rise distance of given liftId.
+   * @param liftNum liftId.
+   * @return vertical rise distance of this liftId.
+   */
   public int getVertical(String liftNum) {
     int listNumInt = Integer.parseInt(liftNum);
     if (listNumInt < 11) {
@@ -36,6 +50,12 @@ public class CommonBuilderWriter {
     }
   }
 
+  /**
+   * liftBuildWrite sorts the liftIds by their ride number frequency in descending order
+   * and write them in designated output file.
+   * @param liftRides map contains liftId and its frequency of ride.
+   * @param fileName output file name.
+   */
   public void liftBuildWrite(Map<String,Integer> liftRides,String fileName) {
     StringBuilder liftSb = new StringBuilder("LiftID,Number of Rides\n");
     for (int i = 1; i <= 40; i++) { //all 40 lifts
@@ -46,6 +66,12 @@ public class CommonBuilderWriter {
     readWriteCsv.printStringToCsv(liftSb.toString(),fileName);
   }
 
+  /**
+   * hourBuildWrite finds the top 10 busiest lifts for 6 section of hour.
+   * @param hourRides map contains key of the section hour number and value of a map with liftId
+   *                  mapping to its frequency.
+   * @param fileName output file name.
+   */
   public void hourBuildWrite(Map<Integer,Map<String,Integer>> hourRides, String fileName) {
     Queue<Map.Entry<String,Integer>> maxHeap = new PriorityQueue<>( //maxHeap sort the map by value in descending order
         (object1, object2) -> object2.getValue() - object1.getValue()
