@@ -2,17 +2,19 @@ package edu.neu.ccs.cs5010;
 
 import java.util.*;
 
+/**
+ * ConcurrentSolution using data processing pipelines to parallelize the solution.
+ */
 public class ConcurrentSolution {
-  private ReadWriteCsv readWriteCsv = new ReadWriteCsv();
-
   private Queue<String> skierQueue; // KV pair: <skierID,liftID>
   private Queue<String> liftQueue; // <liftID>
   private Queue<String> hourQueue; //<hour number(1-6), liftID>
 
   /**
-   * Constructor: read data from CSV for three queues at instance construction.
+   * Constructs a new ConcurrentSolution and initializes the three queues that stores the data.
    */
   public ConcurrentSolution() {
+    ReadWriteCsv readWriteCsv = new ReadWriteCsv();
     readWriteCsv.readForConcurrent();
     skierQueue = readWriteCsv.getSkierQueue();
     liftQueue = readWriteCsv.getLiftQueue();
@@ -35,7 +37,4 @@ public class ConcurrentSolution {
     long duration = endTime - startTime;
     System.out.println("Concurrent Solution Runtime: " + duration + " ms.");
   }
-
-
-
 }

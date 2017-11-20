@@ -10,6 +10,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
+/**
+ * ReadWriteCsv reads and writes csv files.
+ */
 public class ReadWriteCsv {
   // CONSTANTS:
   private static final int MINUTES_IN_A_HOUR = 60;
@@ -68,18 +71,35 @@ public class ReadWriteCsv {
     }
   }
 
+  /**
+   * Getter method of the allRows.
+   * @return a string array list that contains all the data of the given file.
+   */
   public List<String[]> getAllRows() {
     return allRows;
   }
 
+  /**
+   * Getter method of the skierQueue.
+   * @return a Queue contains KV pair, namely "skierID, liftID";
+   */
   public Queue<String> getSkierQueue() {
     return skierQueue;
   }
 
+  /**
+   * Getter method of the liftQueue.
+   * @return a Queue contains a record for every lift ride.
+   */
   public Queue<String> getLiftQueue() {
     return liftQueue;
   }
 
+  /**
+   * Getter method of the hourQueue.
+   * @return a Queue contains a record for every lift ride in each hour,
+   * namely "hour number(1-6), liftID".
+   */
   public Queue<String> getHourQueue() {
     return hourQueue;
   }

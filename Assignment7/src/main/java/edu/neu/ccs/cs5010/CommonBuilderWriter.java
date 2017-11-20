@@ -4,6 +4,9 @@ import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
+/**
+ * CommonBuilderWriter contains all the common methods shared by consequential and concurrent solutions.
+ */
 public class CommonBuilderWriter {
   // CONSTANTS:
   private static final int NUMBER_OF_TOP_SKIERS_BY_VERTICAL = 100;
@@ -19,8 +22,9 @@ public class CommonBuilderWriter {
   private ReadWriteCsv readWriteCsv = new ReadWriteCsv();
 
   /**
-   * convert map to output string and print to file.
-   * @param skierVertical mapping between skier Id and vertical sum.
+   * skierBuildWrite sorts the skierIds by their total vertical rise in descending order
+   * and write them in designated output file.
+   * @param skierVertical Map contains skierId as key and its vertical distance as value.
    * @param fileName output file name.
    */
   public void skierBuildWrite(Map<String,Integer> skierVertical, String fileName) {
@@ -42,9 +46,9 @@ public class CommonBuilderWriter {
   }
 
   /**
-   * get height of lift by lift Id.
-   * @param liftNum current lift Id.
-   * @return height of the lift with the given lift Id.
+   * Helper method for skierBuildWrite that finds the vertical rise distance of given liftId.
+   * @param liftNum liftId.
+   * @return vertical rise distance of this liftId.
    */
   public int getVertical(String liftNum) {
     int liftNumInt = Integer.parseInt(liftNum);
@@ -60,8 +64,9 @@ public class CommonBuilderWriter {
   }
 
   /**
-   * convert map to output string and print to file.
-   * @param liftRides mapping between liftId and number of rides.
+   * liftBuildWrite sorts the liftIds by their ride number frequency in descending order
+   * and write them in designated output file.
+   * @param liftRides map contains liftId and its frequency of ride.
    * @param fileName output file name.
    */
   public void liftBuildWrite(Map<String,Integer> liftRides,String fileName) {
@@ -75,9 +80,9 @@ public class CommonBuilderWriter {
   }
 
   /**
-   * convert map to output string and print to file.
-   * @param hourRides mapping between hour and
-   *                  [mapping between liftId and number of rides of the hour].
+   * hourBuildWrite finds the top 10 busiest lifts for 6 section of hour.
+   * @param hourRides map contains key of the section hour number and value of a map with liftId
+   *                  mapping to its frequency.
    * @param fileName output file name.
    */
   public void hourBuildWrite(Map<Integer,Map<String,Integer>> hourRides, String fileName) {

@@ -3,6 +3,9 @@ package edu.neu.ccs.cs5010;
 import java.util.*;
 
 
+/**
+ * Sequential solution that reads data from given file and generate desired output files.
+ */
 public class SequentialSolution {
   // CONSTANTS:
   private static final int FIRST_HOUR = 1;
@@ -20,7 +23,7 @@ public class SequentialSolution {
   private Map<Integer,Map<String,Integer>> hourRides = new HashMap<>();
 
   /**
-   * Constructor: call function to read CSV to memory and initialize  at construction.
+   * Constructs a new SequentialSolution and initialize allRows, a string array list.
    */
   public SequentialSolution() {
     ReadWriteCsv readWriteCsv = new ReadWriteCsv();

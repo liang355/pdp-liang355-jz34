@@ -4,6 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Queue;
 
+/**
+ * liftThread is a thread finds the ride number of each liftId.
+ */
 public class LiftThread extends Thread {
   // FIELDS:
   //liftQueue: <liftID>
