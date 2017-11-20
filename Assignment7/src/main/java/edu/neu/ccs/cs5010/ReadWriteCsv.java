@@ -11,6 +11,9 @@ import java.util.List;
 import java.util.Queue;
 
 public class ReadWriteCsv {
+  // CONSTANTS:
+  private static final int MINUTES_IN_A_HOUR = 60;
+
   //for sequential solution
   private List<String[]> allRows;
 
@@ -19,28 +22,18 @@ public class ReadWriteCsv {
   private Queue<String> liftQueue = new LinkedList<>(); // <liftID>
   private Queue<String> hourQueue = new LinkedList<>(); //<hour number(1-6), liftID>
 
-  // main method is only for test the reading time for two solutions
-//  public static void main(String[] args) {
-//    ReadWriteCsv test = new ReadWriteCsv();
-//    long s1 = System.currentTimeMillis();
-//    test.readForSequential();
-//    long e1 = System.currentTimeMillis();
-//    long r1 = e1 - s1;
-//    System.out.println(r1);
-//
-//    long s2 = System.currentTimeMillis();
-//    test.readForConcurrent();
-//    long e2 = System.currentTimeMillis();
-//    long r2 = e2 - s2;
-//    System.out.println(r2);
-//  }
-
+  /**
+   * read CSV for sequential solution.
+   */
   public void readForSequential() {
     CsvParserSettings settings = new CsvParserSettings();
     CsvParser parser = new CsvParser(settings);
     allRows = parser.parseAll(new File("PDPAssignment.csv"));
   }
 
+  /**
+   * read CSV for concurrent solution.
+   */
   public void readForConcurrent() {
     CsvParserSettings settings = new CsvParserSettings();
     CsvParser parser = new CsvParser(settings);
@@ -52,7 +45,7 @@ public class ReadWriteCsv {
       String skierId = row[2];
       String liftId = row[3];
       int minute = Integer.parseInt(row[4]);
-      int hour = minute/60 + (minute%60 == 0 ? 0 : 1);//calculate the hour
+      int hour = minute / MINUTES_IN_A_HOUR + (minute % MINUTES_IN_A_HOUR == 0 ? 0 : 1);
 
       skierQueue.add(skierId + "," + liftId);
       liftQueue.add(liftId);
@@ -60,6 +53,11 @@ public class ReadWriteCsv {
     }
   }
 
+  /**
+   * print output file string to specified output file.
+   * @param str string to write to file.
+   * @param outputFileName the name of the output file.
+   */
   public void printStringToCsv(String str, String outputFileName) {
     try {
       PrintWriter out = new PrintWriter(outputFileName);

@@ -9,6 +9,9 @@ public class ConcurrentSolution {
   private Queue<String> liftQueue; // <liftID>
   private Queue<String> hourQueue; //<hour number(1-6), liftID>
 
+  /**
+   * Constructor: read data from CSV for three queues at instance construction.
+   */
   public ConcurrentSolution() {
     readWriteCsv.readForConcurrent();
     skierQueue = readWriteCsv.getSkierQueue();
@@ -16,6 +19,9 @@ public class ConcurrentSolution {
     hourQueue = readWriteCsv.getHourQueue();
   }
 
+  /**
+   * Start three threads with queues, record actual runtime.
+   */
   public void runConcurrent() {
     SkierThread runSkier = new SkierThread(skierQueue);
     LiftThread runLift = new LiftThread(liftQueue);
