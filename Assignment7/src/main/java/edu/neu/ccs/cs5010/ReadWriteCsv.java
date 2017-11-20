@@ -28,19 +28,19 @@ public class ReadWriteCsv {
   /**
    * read CSV for sequential solution.
    */
-  public void readForSequential() {
+  public void readForSequential(String pathname) {
     CsvParserSettings settings = new CsvParserSettings();
     CsvParser parser = new CsvParser(settings);
-    allRows = parser.parseAll(new File("PDPAssignment.csv"));
+    allRows = parser.parseAll(new File(pathname));
   }
 
   /**
    * read CSV for concurrent solution.
    */
-  public void readForConcurrent() {
+  public void readForConcurrent(String pathname) {
     CsvParserSettings settings = new CsvParserSettings();
     CsvParser parser = new CsvParser(settings);
-    parser.beginParsing(new File("PDPAssignment.csv"));
+    parser.beginParsing(new File(pathname));
 
     String[] row;
     parser.parseNext(); //skip the header

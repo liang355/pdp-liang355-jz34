@@ -7,6 +7,8 @@ import static org.junit.Assert.*;
 public class SkiDataProcessorTest {
     @Test
     public void main() throws Exception {
+        SkiDataProcessor.main(new String[] {});
+
     }
 
 }

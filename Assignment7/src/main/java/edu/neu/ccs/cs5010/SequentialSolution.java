@@ -27,7 +27,7 @@ public class SequentialSolution {
    */
   public SequentialSolution() {
     ReadWriteCsv readWriteCsv = new ReadWriteCsv();
-    readWriteCsv.readForSequential();
+    readWriteCsv.readForSequential("PDPAssignment.csv");
     allRows = readWriteCsv.getAllRows();
     // initialize the hourRides with six hour sections
     for (int i = FIRST_HOUR; i <= LAST_HOUR; i++) {

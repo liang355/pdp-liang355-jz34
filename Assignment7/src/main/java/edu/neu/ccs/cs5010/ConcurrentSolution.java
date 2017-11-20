@@ -15,7 +15,7 @@ public class ConcurrentSolution {
    */
   public ConcurrentSolution() {
     ReadWriteCsv readWriteCsv = new ReadWriteCsv();
-    readWriteCsv.readForConcurrent();
+    readWriteCsv.readForConcurrent("PDPAssignment.csv");
     skierQueue = readWriteCsv.getSkierQueue();
     liftQueue = readWriteCsv.getLiftQueue();
     hourQueue = readWriteCsv.getHourQueue();
