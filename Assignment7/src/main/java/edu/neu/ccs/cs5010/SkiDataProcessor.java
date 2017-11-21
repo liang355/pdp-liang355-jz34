@@ -1,6 +1,6 @@
 package edu.neu.ccs.cs5010;
 
-import edu.neu.ccs.cs5010.Bonus.ExplorationSolution;
+//import edu.neu.ccs.cs5010.Bonus.ExplorationSolution;
 
 /**
  * SkiDataProcessor is the starting point of the program that given a large amount of data,
