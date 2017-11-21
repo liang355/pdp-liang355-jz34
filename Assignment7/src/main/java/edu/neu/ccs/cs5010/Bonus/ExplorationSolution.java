@@ -47,6 +47,9 @@ public class ExplorationSolution {
             SmallSkierThread runSmallSkier = new SmallSkierThread(smallSkierQueues.get(i));
             SmallLiftThread runSmallLift = new SmallLiftThread(smallLiftQueues.get(i));
             SmallHourThread runSmallHour = new SmallHourThread(smallhourQueues.get(i));
+            runSmallSkier.start();
+            runSmallHour.start();
+            runSmallLift.start();
         }
         // -> Aggregate results here
         // ...
