@@ -25,16 +25,15 @@ public class ConcurrentSolution {
    * Start three threads with queues, record actual runtime.
    */
   public void runConcurrent() {
+    long startTime = System.nanoTime();
     SkierThread runSkier = new SkierThread(skierQueue);
     LiftThread runLift = new LiftThread(liftQueue);
     HourThread runHour = new HourThread(hourQueue);
-
-    long startTime = System.currentTimeMillis();
     runSkier.start();
     runLift.start();
     runHour.start();
-    long endTime = System.currentTimeMillis();
+    long endTime = System.nanoTime();
     long duration = endTime - startTime;
-    System.out.println("Concurrent Solution Runtime: " + duration + " ms.");
+    System.out.println("Concurrent Solution Runtime: " + duration/1000f + " microseconds");
   }
 }

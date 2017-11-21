@@ -39,11 +39,11 @@ public class SequentialSolution {
    * run the sequential solution, record actual runtime.
    */
   public void runSequential() {
-    long startTime = System.currentTimeMillis();
+    long startTime = System.nanoTime();
     processAllRows();
-    long endTime = System.currentTimeMillis();
+    long endTime = System.nanoTime();
     long duration = endTime - startTime;
-    System.out.println("Sequential Solution Runtime: " + duration + " ms.");
+    System.out.println("Sequential Solution Runtime: " + duration/1000f + " microseconds");
   }
 
   /**
