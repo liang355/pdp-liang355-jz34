@@ -42,4 +42,9 @@ public class HourThread extends Thread {
 
         commonBw.hourBuildWrite(hourRides,"concurrent results/hours.csv");
     }
+
+    private void writeToFile() {
+
+    }
+
 }
