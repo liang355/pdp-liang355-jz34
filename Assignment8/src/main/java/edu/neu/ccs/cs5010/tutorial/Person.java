@@ -1,4 +1,4 @@
-package edu.neu.ccs.cs5010;
+package edu.neu.ccs.cs5010.tutorial;
 
 public class Person {
     private int id;

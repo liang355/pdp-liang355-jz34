@@ -1,4 +1,4 @@
-package edu.neu.ccs.cs5010;
+package edu.neu.ccs.cs5010.tutorial;
 
 public class Ride {
     private String time;

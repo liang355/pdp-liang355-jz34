@@ -1,4 +1,6 @@
-package edu.neu.ccs.cs5010;
+package edu.neu.ccs.cs5010.tutorial;
+
+import edu.neu.ccs.cs5010.tutorial.PersonRecord;
 
 import java.io.EOFException;
 import java.io.IOException;
