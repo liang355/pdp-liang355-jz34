@@ -27,10 +27,10 @@ public class ConcurrentSolution {
     public void runConcurrent() {
         long startTime = System.nanoTime();
         SkierThread runSkier = new SkierThread(skierQueue);
-//        LiftThread runLift = new LiftThread(liftQueue);
+        LiftThread runLift = new LiftThread(liftQueue);
 //        HourThread runHour = new HourThread(hourQueue);
         runSkier.start();
-//        runLift.start();
+        runLift.start();
 //        runHour.start();
         long endTime = System.nanoTime();
         long duration = endTime - startTime;

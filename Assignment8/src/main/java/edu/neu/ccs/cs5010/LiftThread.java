@@ -1,5 +1,6 @@
 package edu.neu.ccs.cs5010;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Queue;
@@ -33,7 +34,19 @@ public class LiftThread extends Thread {
             String currLiftId = liftQueue.poll();
             liftRides.put(currLiftId, liftRides.getOrDefault(currLiftId,0) + 1);
         }
+        writeToFile();
 
-        commonBw.liftBuildWrite(liftRides,"concurrent results/lifts.csv");
+//        commonBw.liftBuildWrite(liftRides,"concurrent results/lifts.csv");
+    }
+
+    private void writeToFile() {
+        try {
+            LiftFileEditor fe = new LiftFileEditor("lifts.dat");
+            for (String key : liftRides.keySet()) {
+              fe.insertRecord(new LiftRecord(Integer.valueOf(key), liftRides.get(key)));
+            }
+        } catch (IOException ioe) {
+          System.out.println("*** OOPS! Something is wrong when writing to file!");
+        }
     }
 }
