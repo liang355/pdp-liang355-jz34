@@ -6,11 +6,15 @@ public class Test {
     public static void main(String[] args)
             throws IOException {
         SkierFileEditor fe = new SkierFileEditor("skier.dat");
-        fe.insertRecord(new SkierRecord(36371, 13, 9000, 0));
-        fe.insertRecord(new SkierRecord(28151, 12, 8900, 0));
-        fe.insertRecord(new SkierRecord(12350, 11, 8700, 0));
+//        fe.insertRecord(new SkierRecord(36371, 13, 9000, 0));
+//        fe.insertRecord(new SkierRecord(28151, 12, 8900, 0));
+//        fe.insertRecord(new SkierRecord(12350, 11, 8700, 0));
 
-        System.out.println(fe.getRecord(36371).toString());
+        System.out.println(fe.getRecord(31).toString());
+        System.out.println(fe.getRecord(46).toString());
+        System.out.println(fe.getRecord(54).toString());
+        System.out.println(fe.getRecord(58).toString());
+        System.out.println(fe.getRecord(1409).toString());
 
 //        FileEditor fe = new FileEditor("people.dat");
 //

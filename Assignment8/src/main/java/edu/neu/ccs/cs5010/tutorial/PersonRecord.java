@@ -1,4 +1,6 @@
-package edu.neu.ccs.cs5010;
+package edu.neu.ccs.cs5010.tutorial;
+
+import edu.neu.ccs.cs5010.tutorial.Person;
 
 import java.io.IOException;
 import java.io.RandomAccessFile;
