@@ -1,11 +1,13 @@
-package edu.neu.ccs.cs5010;
+package edu.neu.ccs.cs5010.part1.hours;
 
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
+/**
+ * HourRecord to read/write from/to the random access file.
+ */
 public class HourRecord extends Hour {
   public static final int SIZE = 11 * Integer.BYTES; ////????????
 

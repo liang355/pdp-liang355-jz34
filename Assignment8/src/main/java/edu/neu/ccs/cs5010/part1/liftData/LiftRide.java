@@ -1,5 +1,8 @@
-package edu.neu.ccs.cs5010;
+package edu.neu.ccs.cs5010.part1.liftData;
 
+/**
+ * LiftRide object with its skier id and ride information.
+ */
 public class LiftRide {
   //Fields
   //rideInfo: "(time):(liftId)"

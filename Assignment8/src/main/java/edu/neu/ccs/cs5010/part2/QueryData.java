@@ -1,6 +1,6 @@
 package edu.neu.ccs.cs5010.part2;
 
-import edu.neu.ccs.cs5010.ReadWriteCsv;
+import edu.neu.ccs.cs5010.part1.ReadWriteCsv;
 
 import java.util.ArrayList;
 import java.util.List;

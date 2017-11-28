@@ -1,11 +1,13 @@
-package edu.neu.ccs.cs5010;
+package edu.neu.ccs.cs5010.part1.hours;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-public class Hour { //the top 10 most popular lifts for each hour
+/**
+ * Hour object with its hour number and the top 10 most populat lifts
+ * in this hour.
+ */
+public class Hour {
   private int hourNum;
   private List<Integer> liftIdList = new ArrayList<>();
 

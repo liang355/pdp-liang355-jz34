@@ -1,9 +1,11 @@
-package edu.neu.ccs.cs5010;
+package edu.neu.ccs.cs5010.part1.skiers;
 
 import java.io.IOException;
 import java.io.RandomAccessFile;
-import java.util.List;
 
+/**
+ * SkierRecord to read/write from/to the random access file.
+ */
 public class SkierRecord extends Skier {
     public static final int SIZE = 4 * 4; // there are 4 integer fields, each is 4 bytes
 
@@ -34,23 +36,4 @@ public class SkierRecord extends Skier {
         file.writeInt(getTotalVertical());
         file.writeInt(getNumberOfViews());
     }
-
-//    private String readString(RandomAccessFile file)
-//            throws IOException {
-//        char[] s = new char[15];
-//        for (int i = 0; i < s.length; i++)
-//            s[i] = file.readChar();
-//        return new String(s).replace('\0', ' ');
-//    }
-//
-//    private void writeString(RandomAccessFile file, String s)
-//            throws IOException {
-//        StringBuffer buffer = null;
-//        if (s != null)
-//            buffer = new StringBuffer(s);
-//        else
-//            buffer = new StringBuffer(15);
-//        buffer.setLength(15);
-//        file.writeChars(buffer.toString());
-//    }
 }

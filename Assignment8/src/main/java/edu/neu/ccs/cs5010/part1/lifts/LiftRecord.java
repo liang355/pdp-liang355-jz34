@@ -1,10 +1,13 @@
-package edu.neu.ccs.cs5010;
+package edu.neu.ccs.cs5010.part1.lifts;
 
 import java.io.IOException;
 import java.io.RandomAccessFile;
 
+/**
+ * LiftRecord to read/write from/to the random access file.
+ */
 public class LiftRecord extends Lift {
-  public static final int SIZE = 2 * 4; // 2 int fields?????
+  public static final int SIZE = 2 * 4;
 
   public LiftRecord() {
     super();
