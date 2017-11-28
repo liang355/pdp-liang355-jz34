@@ -56,6 +56,20 @@ public class ReadWriteCsv {
         }
     }
 
+    public void readForQuery(String pathname, int numOfQueries) {
+        CsvParserSettings settings = new CsvParserSettings();
+        CsvParser parser = new CsvParser(settings);
+        parser.beginParsing(new File(pathname));
+
+        String[] row;
+        int count = 0;
+        parser.parseNext(); //skip the header
+        while ((row = parser.parseNext()) != null && count < numOfQueries) {
+            allRows.add(row);
+            count++;
+        }
+    }
+
     /**
      * print output file string to specified output file.
      * @param str string to write to file.
