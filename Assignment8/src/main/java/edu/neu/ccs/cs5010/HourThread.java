@@ -1,8 +1,8 @@
 package edu.neu.ccs.cs5010;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Queue;
+import java.io.IOException;
+import java.io.RandomAccessFile;
+import java.util.*;
 
 public class HourThread extends Thread {
     // CONSTANTS:
@@ -39,12 +39,29 @@ public class HourThread extends Thread {
             String liftId = currPair[1];
             hourRides.get(hour).put(liftId, hourRides.get(hour).getOrDefault(liftId,0) + 1);
         }
-
-        commonBw.hourBuildWrite(hourRides,"concurrent results/hours.csv");
+        writeToFile();
+        //commonBw.hourBuildWrite(hourRides,"concurrent results/hours.csv");
     }
 
     private void writeToFile() {
-
+      try {
+        HourFileEditor fe = new HourFileEditor("hours.dat");
+        Queue<Map.Entry<String,Integer>> maxHeap = new PriorityQueue<>(
+            (object1, object2) -> object2.getValue() - object1.getValue()
+        );
+        for (int i = 1; i <= NUMBER_OF_HOUR; i++) {
+          //maxHeap.clear();
+          maxHeap.addAll(hourRides.get(i).entrySet());
+          List<Integer> topTenList = new ArrayList<>();
+          while (!maxHeap.isEmpty()) {
+            Map.Entry<String, Integer> curr = maxHeap.poll();
+            topTenList.add(Integer.valueOf(curr.getKey()));
+          }
+          fe.insertRecord(new HourRecord(i,topTenList));
+        }
+      } catch (IOException ioe) {
+        System.out.println("*** OOPS! Something is wrong when writing to file!");
+      }
     }
 
 }
