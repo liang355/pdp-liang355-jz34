@@ -28,10 +28,10 @@ public class ConcurrentSolution {
         long startTime = System.nanoTime();
         SkierThread runSkier = new SkierThread(skierQueue);
         LiftThread runLift = new LiftThread(liftQueue);
-//        HourThread runHour = new HourThread(hourQueue);
+        HourThread runHour = new HourThread(hourQueue);
         runSkier.start();
         runLift.start();
-//        runHour.start();
+        runHour.start();
         long endTime = System.nanoTime();
         long duration = endTime - startTime;
         System.out.println("Concurrent Solution Runtime: " + duration/1000f + " microseconds");
