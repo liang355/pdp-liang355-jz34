@@ -1,7 +1,9 @@
 package edu.neu.ccs.cs5010.part2;
 
 import edu.neu.ccs.cs5010.ReadWriteCsv;
+import edu.neu.ccs.cs5010.SkierFileEditor;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,7 +11,7 @@ public class QueryData {
     private ReadWriteCsv readWriteCsv = new ReadWriteCsv();
     private List<List<String[]>> chunks = new ArrayList<>();
     private List<String[]> rows;
-    private QueryThread queryThread;
+    private SkierFileEditor skierFE;
 
     public QueryData(String filename, int numOfQueries) {
         this.readWriteCsv.readForQuery(filename, numOfQueries);
@@ -18,13 +20,13 @@ public class QueryData {
         for(int i = 0; i < numOfQueries; i += chunkSize) {
             chunks.add(rows.subList(i, i + chunkSize));
         }
-        System.out.println(chunks.size());
+//        System.out.println(chunks.size());
     }
 
     public void runQueries() {
+
         for(int i = 0; i < 20; i++) {
-            queryThread = new QueryThread(chunks.get(i), i+1);
-            queryThread.start();
+            new QueryThread(chunks.get(i), i+1, skierFE).start();
         }
     }
 

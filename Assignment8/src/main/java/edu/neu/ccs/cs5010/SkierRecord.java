@@ -3,6 +3,8 @@ package edu.neu.ccs.cs5010;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.List;
+import java.util.concurrent.locks.ReadWriteLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 public class SkierRecord extends Skier {
     public static final int SIZE = 4 * 4; // there are 4 integer fields, each is 4 bytes
@@ -19,12 +21,13 @@ public class SkierRecord extends Skier {
             throws IOException {
         int skierId = file.readInt();
         if(skierId < 1) {
-            throw new IllegalArgumentException("given skierId does not exist in records!!");
+            throw new IllegalArgumentException("skierId " + skierId + " is invalid!");
         }
         setSkierId(skierId);
         setNumRides(file.readInt());
         setTotalVertical(file.readInt());
         setNumberOfViews(file.readInt());
+
     }
 
     public void writeToFile(RandomAccessFile file)
@@ -33,6 +36,7 @@ public class SkierRecord extends Skier {
         file.writeInt(getNumRides());
         file.writeInt(getTotalVertical());
         file.writeInt(getNumberOfViews());
+
     }
 
 //    private String readString(RandomAccessFile file)
