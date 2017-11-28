@@ -6,6 +6,7 @@ import com.univocity.parsers.csv.CsvParserSettings;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
@@ -18,7 +19,7 @@ public class ReadWriteCsv {
     private static final int MINUTES_IN_A_HOUR = 60;
 
     //for sequential solution
-    private List<String[]> allRows;
+    private List<String[]> rows;
 
     //for concurrency solution
     private Queue<String> skierQueue = new LinkedList<>(); // KV pair: <skierID,liftID>
@@ -31,7 +32,7 @@ public class ReadWriteCsv {
     public void readForSequential(String pathname) {
         CsvParserSettings settings = new CsvParserSettings();
         CsvParser parser = new CsvParser(settings);
-        allRows = parser.parseAll(new File(pathname));
+        rows = parser.parseAll(new File(pathname));
     }
 
     /**
@@ -61,11 +62,11 @@ public class ReadWriteCsv {
         CsvParser parser = new CsvParser(settings);
         parser.beginParsing(new File(pathname));
 
+        rows = new ArrayList<>();
         String[] row;
         int count = 0;
-        parser.parseNext(); //skip the header
         while ((row = parser.parseNext()) != null && count < numOfQueries) {
-            allRows.add(row);
+            rows.add(row);
             count++;
         }
     }
@@ -86,11 +87,11 @@ public class ReadWriteCsv {
     }
 
     /**
-     * Getter method of the allRows.
+     * Getter method of the rows.
      * @return a string array list that contains all the data of the given file.
      */
-    public List<String[]> getAllRows() {
-        return allRows;
+    public List<String[]> getRows() {
+        return rows;
     }
 
     /**
