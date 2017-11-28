@@ -1,8 +1,8 @@
 package edu.neu.ccs.cs5010.part2;
 
-import edu.neu.ccs.cs5010.ReadWriteCsv;
-import edu.neu.ccs.cs5010.SkierFileEditor;
-import edu.neu.ccs.cs5010.SkierRecord;
+import edu.neu.ccs.cs5010.part1.ReadWriteCsv;
+import edu.neu.ccs.cs5010.part1.skiers.SkierFileEditor;
+import edu.neu.ccs.cs5010.part1.skiers.SkierRecord;
 
 import java.io.IOException;
 import java.util.LinkedList;
@@ -40,9 +40,9 @@ public class QueryThread extends Thread {
 //                    System.out.println(queryParam);
                     SkierRecord skierRecord = skierFE.getRecord(Integer.valueOf(queryParam));
                     // update (viewCount++)
-//                    skierRecord.setNumberOfViews(skierRecord.getNumberOfViews() + 1);
+                    skierRecord.setNumberOfViews(skierRecord.getNumberOfViews() + 1);
                     // write
-//                    skierFE.insertRecord(skierRecord);
+                    skierFE.insertRecord(skierRecord);
                     skierSB.append(skierRecord.toString()).append("\n");
                 }
             } catch (IOException ioe) {

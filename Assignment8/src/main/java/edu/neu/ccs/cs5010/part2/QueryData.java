@@ -1,7 +1,8 @@
 package edu.neu.ccs.cs5010.part2;
 
-import edu.neu.ccs.cs5010.ReadWriteCsv;
-import edu.neu.ccs.cs5010.SkierFileEditor;
+
+import edu.neu.ccs.cs5010.part1.ReadWriteCsv;
+import edu.neu.ccs.cs5010.part1.skiers.SkierFileEditor;
 
 import java.io.IOException;
 import java.util.ArrayList;
