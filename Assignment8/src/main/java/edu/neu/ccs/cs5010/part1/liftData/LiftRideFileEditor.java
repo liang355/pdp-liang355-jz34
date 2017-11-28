@@ -14,6 +14,10 @@ public class LiftRideFileEditor {
     file = new RandomAccessFile(fileString, "rw");
   }
 
+  /**
+   * close the file.
+   * @throws IOException
+   */
   public void close() throws IOException {
     if (file != null) {
       file.close();
@@ -23,8 +27,8 @@ public class LiftRideFileEditor {
   /**
    * Get a record from the file.
    * @param skierId lift id.
-   * @return LiftRecord
-   * @throws IOException
+   * @return LiftRideRecord
+   * @throws IOException if something wrong in I/O.
    */
   public LiftRideRecord getRecord(int skierId) throws IOException {
     LiftRideRecord record = new LiftRideRecord();
@@ -39,8 +43,8 @@ public class LiftRideFileEditor {
   /**
    * Insert a record to the file.
    * @param record to be inserted.
-   * @throws IllegalArgumentException
-   * @throws IOException
+   * @throws IllegalArgumentException if argument is illegal.
+   * @throws IOException if something wrong in I/O.
    */
   public void insertRecord(LiftRideRecord record)
       throws IllegalArgumentException, IOException {

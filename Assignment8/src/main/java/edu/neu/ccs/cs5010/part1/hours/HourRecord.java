@@ -19,6 +19,11 @@ public class HourRecord extends Hour {
     super(hourNum, liftIdList);
   }
 
+  /**
+   * read from given random access file.
+   * @param file random access file.
+   * @throws IOException if something wrong in I/O.
+   */
   public void readFromFile(RandomAccessFile file)
       throws IOException {
     int hourNum = file.readInt();
@@ -29,6 +34,11 @@ public class HourRecord extends Hour {
     setLiftIdList(readList(file));
   }
 
+  /**
+   * write to given random access file.
+   * @param file random access file.
+   * @throws IOException if something wrong in I/O.
+   */
   public void writeToFile(RandomAccessFile file)
       throws IOException {
     file.writeInt(getHourNum());

@@ -85,16 +85,16 @@ public class ReadWriteCsv {
    * @return a string array list that contains all the data of the given file.
    */
   public List<String[]> getRows() {
-        return rows;
-    }
+    return rows;
+  }
 
   /**
    * Getter method of the skierQueue.
    * @return a Queue contains KV pair, namely "skierID, liftID";
    */
   public Queue<String> getSkierQueue() {
-        return skierQueue;
-    }
+    return skierQueue;
+  }
 
   /**
    * Getter method of the liftQueue.
@@ -102,7 +102,7 @@ public class ReadWriteCsv {
    */
   public Queue<String> getLiftQueue() {
         return liftQueue;
-    }
+  }
 
   /**
    * Getter method of the hourQueue.
@@ -111,7 +111,7 @@ public class ReadWriteCsv {
    */
   public Queue<String> getHourQueue() {
         return hourQueue;
-    }
+  }
 
   /**
    * Getter method of the skierTimeLift map.

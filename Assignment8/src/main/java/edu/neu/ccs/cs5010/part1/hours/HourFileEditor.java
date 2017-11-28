@@ -14,6 +14,10 @@ public class HourFileEditor {
     file = new RandomAccessFile(fileString, "rw");
   }
 
+  /**
+   * close the file.
+   * @throws IOException
+   */
   public void close() throws IOException {
     if (file != null) {
       file.close();
@@ -23,8 +27,8 @@ public class HourFileEditor {
   /**
    * Get a record from the file.
    * @param hourNum lift id.
-   * @return LiftRecord
-   * @throws IOException
+   * @return a hourRecord.
+   * @throws IOException if something wrong in I/O.
    */
   public HourRecord getRecord(int hourNum)
       throws IOException {
