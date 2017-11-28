@@ -17,6 +17,11 @@ public class LiftRideRecord extends LiftRide{
     super(skierId, rideInfo);
   }
 
+  /**
+   * Reads from given random access file.
+   * @param file given file.
+   * @throws IOException if something wrong in I/O.
+   */
   public void readFromFile(RandomAccessFile file)
       throws IOException {
     int skierId = file.readInt();
@@ -27,17 +32,22 @@ public class LiftRideRecord extends LiftRide{
     setRideInfo(readString(file));
   }
 
+  /**
+   * Writes to given random access file.
+   * @param file given file.
+   * @throws IOException if something wrong in I/O.
+   */
   public void writeToFile(RandomAccessFile file)
       throws IOException {
     file.writeInt(getSkierId());
     writeString(file,getRideInfo());
   }
 
-  private void writeString(RandomAccessFile file, String s)
+  private void writeString(RandomAccessFile file, String str)
       throws IOException {
     StringBuffer buffer = null;
-    if (s != null) {
-      buffer = new StringBuffer(s);
+    if (str != null) {
+      buffer = new StringBuffer(str);
     } else {
       buffer = new StringBuffer(256);
     }

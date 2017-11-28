@@ -7,17 +7,17 @@ import java.io.RandomAccessFile;
  * RandomAccessFile editor for skier data.
  */
 public class SkierFileEditor {
-    RandomAccessFile file;
+  RandomAccessFile file;
 
-    public SkierFileEditor(String fileString)
-            throws IOException {
-        file = new RandomAccessFile(fileString, "rw");
-    }
+  public SkierFileEditor(String fileString)
+      throws IOException {
+    file = new RandomAccessFile(fileString, "rw");
+  }
 
-    public void close() throws IOException {
-        if (file != null)
-            file.close();
-    }
+  public void close() throws IOException {
+    if (file != null)
+      file.close();
+  }
 
   /**
    * Get a record from the file.
@@ -26,13 +26,13 @@ public class SkierFileEditor {
    * @throws IOException
    */
   public SkierRecord getRecord(int skierId) throws IOException {
-        SkierRecord record = new SkierRecord();
-        if (skierId < 1)
-            throw new IllegalArgumentException("invalid ID!!");
-        file.seek((skierId - 1) * SkierRecord.SIZE);
-        record.readFromFile(file);
-        return record;
-    }
+    SkierRecord record = new SkierRecord();
+    if (skierId < 1)
+      throw new IllegalArgumentException("invalid ID!!");
+    file.seek((skierId - 1) * SkierRecord.SIZE);
+    record.readFromFile(file);
+    return record;
+  }
 
   /**
    * Insert a record to the file.
@@ -40,10 +40,10 @@ public class SkierFileEditor {
    * @throws IllegalArgumentException
    * @throws IOException
    */
-    public void insertRecord(SkierRecord record)
-            throws IllegalArgumentException, IOException {
+  public void insertRecord(SkierRecord record)
+      throws IllegalArgumentException, IOException {
 
-        file.seek((record.getSkierId() - 1) * SkierRecord.SIZE);
-        record.writeToFile(file);
-    }
+    file.seek((record.getSkierId() - 1) * SkierRecord.SIZE);
+    record.writeToFile(file);
+  }
 }
