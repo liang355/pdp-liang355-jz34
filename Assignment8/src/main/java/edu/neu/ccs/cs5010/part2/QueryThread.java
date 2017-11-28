@@ -1,6 +1,11 @@
 package edu.neu.ccs.cs5010.part2;
 
 import edu.neu.ccs.cs5010.part1.ReadWriteCsv;
+import edu.neu.ccs.cs5010.part1.hours.HourFileEditor;
+import edu.neu.ccs.cs5010.part1.liftData.LiftRideFileEditor;
+import edu.neu.ccs.cs5010.part1.liftData.LiftRideRecord;
+import edu.neu.ccs.cs5010.part1.lifts.LiftFileEditor;
+import edu.neu.ccs.cs5010.part1.lifts.LiftRecord;
 import edu.neu.ccs.cs5010.part1.skiers.SkierFileEditor;
 import edu.neu.ccs.cs5010.part1.skiers.SkierRecord;
 
@@ -11,8 +16,14 @@ import java.util.List;
 public class QueryThread extends Thread {
     private List<String[]> rows = new LinkedList<>();
     private StringBuilder skierSB = new StringBuilder("");
+    private StringBuilder liftRideSB = new StringBuilder("");
+    private StringBuilder hourSB = new StringBuilder("");
+    private StringBuilder liftSB = new StringBuilder("");
     private ReadWriteCsv readWriteCsv = new ReadWriteCsv();
     private SkierFileEditor skierFE;
+    private LiftRideFileEditor liftRideFE;
+    private HourFileEditor hourFE;
+    private LiftFileEditor liftFE;
     private int threadId;
 
     public QueryThread(List<String[]> rows, int threadId, SkierFileEditor skierFE) {
@@ -25,6 +36,7 @@ public class QueryThread extends Thread {
     public synchronized void run() {
         try {
             skierFE = new SkierFileEditor("skier.dat");
+
         } catch (IOException ioe) {
             System.out.println("*** OOPS! Something is wrong when creating SkierFileEditor");
         }
@@ -40,10 +52,17 @@ public class QueryThread extends Thread {
 //                    System.out.println(queryParam);
                     SkierRecord skierRecord = skierFE.getRecord(Integer.valueOf(queryParam));
                     // update (viewCount++)
-                    skierRecord.setNumberOfViews(skierRecord.getNumberOfViews() + 1);
+//                    skierRecord.setNumberOfViews(skierRecord.getNumberOfViews() + 1);
                     // write
-                    skierFE.insertRecord(skierRecord);
+//                    skierFE.insertRecord(skierRecord);
                     skierSB.append(skierRecord.toString()).append("\n");
+                } else if (queryType.equals("2")) {
+//                    LiftRideRecord liftRideRecord = liftRideFE.getRecord(Integer.valueOf(queryParam));
+//                    liftRideSB.append(liftRideRecord.toString()).append("\n");
+                } else if (queryType.equals("3")) {
+
+                } else {
+
                 }
             } catch (IOException ioe) {
                 System.out.println("*** OOPS! Something is wrong when reading file!");
