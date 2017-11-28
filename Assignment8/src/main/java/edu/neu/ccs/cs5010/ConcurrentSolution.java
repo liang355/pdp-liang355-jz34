@@ -9,6 +9,8 @@ public class ConcurrentSolution {
     private Queue<String> skierQueue; // KV pair: <skierID,liftID>
     private Queue<String> liftQueue; // <liftID>
     private Queue<String> hourQueue; //<hour number(1-6), liftID>
+  private Map<Integer, String> skierTimeLiftQueue;
+
 
     /**
      * Constructs a new ConcurrentSolution and initializes the three queues that stores the data.
@@ -19,6 +21,7 @@ public class ConcurrentSolution {
         skierQueue = readWriteCsv.getSkierQueue();
         liftQueue = readWriteCsv.getLiftQueue();
         hourQueue = readWriteCsv.getHourQueue();
+      skierTimeLiftQueue = readWriteCsv.getSkierTimeLift();
     }
 
     /**
@@ -29,9 +32,11 @@ public class ConcurrentSolution {
         SkierThread runSkier = new SkierThread(skierQueue);
         LiftThread runLift = new LiftThread(liftQueue);
         HourThread runHour = new HourThread(hourQueue);
+        LiftRideThread runLiftRide = new LiftRideThread(skierTimeLiftQueue);
         runSkier.start();
         runLift.start();
         runHour.start();
+        runLiftRide.start();
         long endTime = System.nanoTime();
         long duration = endTime - startTime;
         System.out.println("Concurrent Solution Runtime: " + duration/1000f + " microseconds");

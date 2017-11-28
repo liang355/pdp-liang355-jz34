@@ -6,10 +6,7 @@ import com.univocity.parsers.csv.CsvParserSettings;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 
 /**
  * ReadWriteCsv reads and writes csv files.
@@ -25,6 +22,7 @@ public class ReadWriteCsv {
     private Queue<String> skierQueue = new LinkedList<>(); // KV pair: <skierID,liftID>
     private Queue<String> liftQueue = new LinkedList<>(); // <liftID>
     private Queue<String> hourQueue = new LinkedList<>(); //<hour number(1-6), liftID>
+    private Map<Integer,String> skierTimeLift = new HashMap<>(); //skierID --> <time:LiftId>
 
     /**
      * read CSV for sequential solution.
@@ -54,6 +52,9 @@ public class ReadWriteCsv {
             skierQueue.add(skierId + "," + liftId);
             liftQueue.add(liftId);
             hourQueue.add(hour + "," + liftId);
+
+            skierTimeLift.put(Integer.valueOf(skierId), skierTimeLift.getOrDefault(Integer.valueOf(skierId),"") + minute + ":" + liftId + "|");
+          //System.out.println(skierTimeLift.get(Integer.valueOf(skierId)));
         }
     }
 
@@ -118,4 +119,8 @@ public class ReadWriteCsv {
     public Queue<String> getHourQueue() {
         return hourQueue;
     }
+
+  public Map<Integer, String> getSkierTimeLift() {
+    return skierTimeLift;
+  }
 }
