@@ -1,8 +1,11 @@
-package edu.neu.ccs.cs5010;
+package edu.neu.ccs.cs5010.part1.skiers;
 
 import java.io.IOException;
 import java.io.RandomAccessFile;
 
+/**
+ * RandomAccessFile editor for skier data.
+ */
 public class SkierFileEditor {
     RandomAccessFile file;
 
@@ -16,7 +19,13 @@ public class SkierFileEditor {
             file.close();
     }
 
-    public SkierRecord getRecord(int skierId) throws IOException {
+  /**
+   * Get a record from the file.
+   * @param skierId given skierId
+   * @return skierRecord
+   * @throws IOException
+   */
+  public SkierRecord getRecord(int skierId) throws IOException {
         SkierRecord record = new SkierRecord();
         if (skierId < 1)
             throw new IllegalArgumentException("invalid ID!!");
@@ -25,6 +34,12 @@ public class SkierFileEditor {
         return record;
     }
 
+  /**
+   * Insert a record to the file.
+   * @param record to be inserted.
+   * @throws IllegalArgumentException
+   * @throws IOException
+   */
     public void insertRecord(SkierRecord record)
             throws IllegalArgumentException, IOException {
 

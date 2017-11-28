@@ -1,9 +1,11 @@
-package edu.neu.ccs.cs5010;
+package edu.neu.ccs.cs5010.part1.lifts;
 
 import java.io.IOException;
 import java.io.RandomAccessFile;
-import java.util.RandomAccess;
 
+/**
+ * RandomAccessFile editor for lift data.
+ */
 public class LiftFileEditor {
   RandomAccessFile file;
 
@@ -18,6 +20,12 @@ public class LiftFileEditor {
     }
   }
 
+  /**
+   * Get a record from the file.
+   * @param liftId lift id.
+   * @return LiftRecord
+   * @throws IOException
+   */
   public LiftRecord getRecord(int liftId) throws IOException {
     LiftRecord record = new LiftRecord();
     if (liftId < 1 || liftId > 40) {
@@ -28,6 +36,12 @@ public class LiftFileEditor {
     return record;
   }
 
+  /**
+   * Insert a record to the file.
+   * @param record to be inserted.
+   * @throws IllegalArgumentException
+   * @throws IOException
+   */
   public void insertRecord(LiftRecord record)
       throws IllegalArgumentException, IOException {
     file.seek((record.getLiftId() - 1) * LiftRecord.SIZE);

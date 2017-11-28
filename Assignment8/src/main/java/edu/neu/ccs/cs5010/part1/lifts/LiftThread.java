@@ -1,4 +1,4 @@
-package edu.neu.ccs.cs5010;
+package edu.neu.ccs.cs5010.part1.lifts;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.Queue;
 
 /**
- * liftThread is a thread finds the ride number of each liftId.
+ * liftThread is a thread finds the total number of lift rides in this day.
  */
 public class LiftThread extends Thread {
     // FIELDS:
@@ -14,7 +14,6 @@ public class LiftThread extends Thread {
     //liftRides: <liftID, value: total number of rides>
     private Queue<String> liftQueue;
     private Map<String,Integer> liftRides = new HashMap<>();
-    private CommonBuilderWriter commonBw = new CommonBuilderWriter();
 
     /**
      * Constructor: initialize field with lift queue.
@@ -35,8 +34,6 @@ public class LiftThread extends Thread {
             liftRides.put(currLiftId, liftRides.getOrDefault(currLiftId,0) + 1);
         }
         writeToFile();
-
-//        commonBw.liftBuildWrite(liftRides,"concurrent results/lifts.csv");
     }
 
     private void writeToFile() {

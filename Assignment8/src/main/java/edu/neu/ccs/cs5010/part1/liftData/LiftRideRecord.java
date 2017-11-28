@@ -1,8 +1,11 @@
-package edu.neu.ccs.cs5010;
+package edu.neu.ccs.cs5010.part1.liftData;
 
 import java.io.IOException;
 import java.io.RandomAccessFile;
 
+/**
+ * LiftRideRecord to read/write from/to the random access file.
+ */
 public class LiftRideRecord extends LiftRide{
   public static final int SIZE = 1024;
 

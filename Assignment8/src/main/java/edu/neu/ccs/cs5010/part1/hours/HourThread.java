@@ -1,9 +1,12 @@
-package edu.neu.ccs.cs5010;
+package edu.neu.ccs.cs5010.part1.hours;
 
 import java.io.IOException;
-import java.io.RandomAccessFile;
 import java.util.*;
 
+/**
+ * hourThread is a thread finds the top 10 most popular lifts, ordered from the lift with
+ * the most rides to the lift with the least.
+ */
 public class HourThread extends Thread {
     // CONSTANTS:
     private static final int NUMBER_OF_HOUR = 6;
@@ -13,7 +16,6 @@ public class HourThread extends Thread {
     //hourRides: <liftId, <liftID -> number of rides in this hour>
     private Queue<String> hourQueue;
     private Map<Integer,Map<String,Integer>> hourRides = new HashMap<>();
-    private CommonBuilderWriter commonBw = new CommonBuilderWriter();
 
     /**
      * Constructor: initialize field with hour queue.
