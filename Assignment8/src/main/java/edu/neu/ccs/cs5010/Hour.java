@@ -1,20 +1,21 @@
 package edu.neu.ccs.cs5010;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class Hour { //the top 10 most popular lifts for each hour
   private int hourNum;
-  private Map<Integer, List<Integer>> hourRides = new HashMap<>();
+  private List<Integer> liftIdList = new ArrayList<>();
 
   public Hour() {
     this(0,null);
   }
 
-  public Hour(int hourNum, Map<Integer, List<Integer>> hourRides) {
+  public Hour(int hourNum, List<Integer> liftIdList) {
     this.hourNum = hourNum;
-    this.hourRides = hourRides;
+    this.liftIdList = liftIdList;
   }
 
   public int getHourNum() {
@@ -25,19 +26,19 @@ public class Hour { //the top 10 most popular lifts for each hour
     this.hourNum = hourNum;
   }
 
-  public Map<Integer, List<Integer>> getHourRides() {
-    return hourRides;
+  public List<Integer> getLiftIdList() {
+    return liftIdList;
   }
 
-  public void setHourRides(Map<Integer, List<Integer>> hourRides) {
-    this.hourRides = hourRides;
+  public void setLiftIdList(List<Integer> liftIdList) {
+    this.liftIdList = liftIdList;
   }
 
   @Override
   public String toString() {
     String ret =  "[" + hourNum + "]\n";
-    for (int key : hourRides.keySet()) {
-      ret += "[" + key + "," + hourRides.get(key) + "]\n";
+    for (int id : liftIdList) {
+      ret += id + "\n";
     }
     return ret;
   }

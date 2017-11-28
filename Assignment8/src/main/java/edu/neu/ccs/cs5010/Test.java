@@ -7,6 +7,7 @@ public class Test {
             throws IOException {
         SkierFileEditor fe = new SkierFileEditor("skier.dat");
         LiftFileEditor fe1 = new LiftFileEditor("lifts.dat");
+        HourFileEditor fe2 = new HourFileEditor("hours.dat");
 //        fe.insertRecord(new SkierRecord(36371, 13, 9000, 0));
 //        fe.insertRecord(new SkierRecord(28151, 12, 8900, 0));
 //        fe.insertRecord(new SkierRecord(12350, 11, 8700, 0));
@@ -17,9 +18,13 @@ public class Test {
         System.out.println(fe.getRecord(58).toString());
         System.out.println(fe.getRecord(1409).toString());
 
-      System.out.println(fe1.getRecord(1).toString());
-      System.out.println(fe1.getRecord(15).toString());
-      System.out.println(fe1.getRecord(40).toString());
+        System.out.println(fe1.getRecord(1).toString());
+        System.out.println(fe1.getRecord(15).toString());
+        System.out.println(fe1.getRecord(40).toString());
+
+        System.out.println(fe2.getRecord(1).toString());
+        System.out.println(fe2.getRecord(2).toString());
+        System.out.println(fe2.getRecord(3).toString());
 
 //        FileEditor fe = new FileEditor("people.dat");
 //
