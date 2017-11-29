@@ -4,6 +4,7 @@ package edu.neu.ccs.cs5010.part2;
 import edu.neu.ccs.cs5010.part1.ReadWriteCsv;
 import edu.neu.ccs.cs5010.part1.skiers.SkierFileEditor;
 
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +22,7 @@ public class QueryData {
         for(int i = 0; i < numOfQueries; i += chunkSize) {
             chunks.add(rows.subList(i, i + chunkSize));
         }
+
 //        System.out.println(chunks.size());
     }
 

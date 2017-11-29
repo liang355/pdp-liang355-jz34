@@ -42,6 +42,7 @@ public class QueryThread extends Thread {
         }
         String outputFileName = "results_" + threadId + ".txt";
         System.out.println(rows.size());
+
         for(int i = 0; i < rows.size(); i++) {
             String[] currPair = rows.get(i);
             String queryType = currPair[0];
