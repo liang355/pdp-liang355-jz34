@@ -36,7 +36,7 @@ public class PlayYahtzee { //Client
 
       while ((fromServer = in.readLine()) != null) {
         System.out.println("Server: " + fromServer);
-        System.out.println(parser.parser(fromServer)); //update
+//        System.out.println(parser.parser(fromServer)); //update
         //if (fromServer.equals("Bye.")) { //*************change later
         //  break; //*************change later
         //}
@@ -47,6 +47,7 @@ public class PlayYahtzee { //Client
         }
       }
       ySocket.close();
+      System.out.println("socket closed !");
     } catch (UnknownHostException e) {
       System.err.println("Don't know about host " + hostName);
       System.exit(1); //?????status
