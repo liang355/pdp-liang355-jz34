@@ -12,7 +12,8 @@ public class PlayYahtzee { //Client
 
 
   public static void main(String[] args) throws IOException{
-    ServerMessageParser parser = new ServerMessageParser();
+    ServerMessageParser serverParser = new ServerMessageParser();
+    ClientMessageParser clientParser = new ClientMessageParser();
     //public void runServer(String[] args) throws IOException{
 
     if (args.length != 2) {
@@ -36,11 +37,21 @@ public class PlayYahtzee { //Client
 
       while ((fromServer = in.readLine()) != null) {
         System.out.println("完成后删了：*****Server: " + fromServer + "*****"); //完成后删了
-        System.out.println(parser.parser(fromServer)); //update
+
+        /*
+        different server flag requires different client frame
+        server flag ---------- client frame
+        ""          ---------- press "Enter"
+        */
+
+        String serverFlag = "";
+        System.out.println(serverParser.parser(fromServer, serverFlag)); //update
         //if (fromServer.equals("Bye.")) { //*************change later
         //  break; //*************change later
         //}
         fromUser = stdIn.readLine();
+
+        while (clientParser.isValidMessage(fromServer,serverFlag))
         if (fromUser != null) {
           //System.out.println("Your input: " + fromUser);
           out.println(fromUser); //what's this???  send the text to the server???
