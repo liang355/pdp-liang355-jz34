@@ -42,7 +42,7 @@ public class PlayYahtzee { //Client
         //}
         fromUser = stdIn.readLine();
         if (fromUser != null) {
-          System.out.println("Your input: " + fromUser);
+          //System.out.println("Your input: " + fromUser);
           out.println(fromUser); //what's this???  send the text to the server???
         }
       }
