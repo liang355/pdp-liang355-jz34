@@ -24,8 +24,8 @@ public class ServerMessageParser {
     }
 
     if (message.contains("START_TURN:")) {
-      return "Round" + message.substring(18, message.length()) + "\n" + //get the round number
-          "Press \"Enter\" to continue.";
+      return "Now it's your turn to play\n" +
+          "Press \"Enter\" to get your first rolled dice";
     }
 
 
