@@ -34,7 +34,7 @@ public class ServerMessageParser {
     }
 
 
-    return "";
+    return message;
 
   }
 }

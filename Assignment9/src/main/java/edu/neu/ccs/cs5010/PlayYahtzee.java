@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
 
 public class PlayYahtzee { //Client
@@ -13,6 +14,7 @@ public class PlayYahtzee { //Client
 
   public static void main(String[] args) throws IOException{
     ServerMessageParser parser = new ServerMessageParser();
+    boolean playerOneWin;
     //public void runServer(String[] args) throws IOException{
 
     if (args.length != 2) {
@@ -23,27 +25,39 @@ public class PlayYahtzee { //Client
     String hostName = args[0];
     int portNumber = Integer.parseInt(args[1]);
 
-    try(
+    try (
         Socket ySocket = new Socket(hostName, portNumber);
         PrintWriter out = new PrintWriter(ySocket.getOutputStream(),true);
         BufferedReader in = new BufferedReader(
             new InputStreamReader(ySocket.getInputStream()))
     ) {
+      ySocket.setSoTimeout(3000); // socket timeout
       BufferedReader stdIn =
           new BufferedReader(new InputStreamReader(System.in));
       String fromServer;
       String fromUser;
 
-      while ((fromServer = in.readLine()) != null) {
-        System.out.println("Server: " + fromServer);
-//        System.out.println(parser.parser(fromServer)); //update
+      while (true) {
+        // waiting for server response
+        try {
+          fromServer = in.readLine();
+        } catch (SocketTimeoutException stoe) {
+          fromServer = "server not responding with your request ... Try another one";
+        }
+        // check for game over
+        if (fromServer.contains("GAME OVER")) {
+          System.out.println(fromServer);
+          break;
+        }
 
-        //if (fromServer.equals("Bye.")) { //*************change later
-        //  break; //*************change later
-        //}
+        // print server message
+        System.out.println("Server: " + fromServer);
+        System.out.println(parser.parser(fromServer)); //update
+
+        // waiting for user input
         fromUser = stdIn.readLine();
         if (fromUser != null) {
-          //System.out.println("Your input: " + fromUser);
+          System.out.println("Your input: " + fromUser);
           out.println(fromUser); //what's this???  send the text to the server???
         }
       }
