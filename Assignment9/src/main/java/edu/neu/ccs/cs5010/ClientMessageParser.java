@@ -9,11 +9,20 @@ public class ClientMessageParser {
 
   public boolean isValidMessage(String message, String serverFlag) {
     message = message.trim();
+    if (!serverFlag.equals("")) {
+      if (serverFlag.equals("CHOOSE_DICE")) {
+        return message.contains("KEEP_DICE");
+      }
+
+      if (serverFlag.equals("CHOOSE_SCORE")) {
+        return message.contains("SCORE_CHOICE");
+      }
+    }
 //    for (String str : VALID_FRAME) {
 //      if (message.contains(str)) {
 //        return true;
 //      }
 //    }
-    return false;
+    return true;
   }
 }

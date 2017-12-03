@@ -36,6 +36,21 @@ public class ServerMessageParser {
           "Select the dice you want to re-roll or keep.";
     }
 
+    if (message.contains("CHOOSE_SCORE:")) {
+      serverFlag = "CHOOSE_SCORE";
+      return "Select your score choice from " + message.substring(23, message.length()) + "\n"; //extract all choices
+    }
+
+    if (message.contains("SCORE_CHOICE_VALID:")) {
+      serverFlag = "";
+      return "Scoring phase finished.\n" + "Press \"Enter\" to continue.";
+    }
+
+    if (message.contains("SCORE_CHOICE_INVALID:")) {
+      serverFlag = "CHOOSE_SCORE";
+      return "Invalid score choice! Please choose a valid score ID from " + message.substring(33, message.length());
+    }
+
 
     return message;
 
