@@ -9,11 +9,11 @@ public class ClientMessageParser {
 
   public boolean isValidMessage(String message, String serverFlag) {
     message = message.trim();
-    for (String str : VALID_FRAME) {
-      if (message.contains(str)) {
-        return true;
-      }
-    }
+//    for (String str : VALID_FRAME) {
+//      if (message.contains(str)) {
+//        return true;
+//      }
+//    }
     return false;
   }
 }
