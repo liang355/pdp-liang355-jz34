@@ -37,12 +37,13 @@ public class PlayYahtzee { //Client
       while ((fromServer = in.readLine()) != null) {
         System.out.println("Server: " + fromServer);
 //        System.out.println(parser.parser(fromServer)); //update
+
         //if (fromServer.equals("Bye.")) { //*************change later
         //  break; //*************change later
         //}
         fromUser = stdIn.readLine();
         if (fromUser != null) {
-          System.out.println("Client: " + fromUser);
+          //System.out.println("Your input: " + fromUser);
           out.println(fromUser); //what's this???  send the text to the server???
         }
       }

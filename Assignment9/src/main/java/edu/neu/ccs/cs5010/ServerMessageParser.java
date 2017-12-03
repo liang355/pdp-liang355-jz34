@@ -19,8 +19,8 @@ public class ServerMessageParser {
     }
 
     if (message.contains("START_ROUND:")) {
-      return "Round" + message.substring(18, message.length()) + "\n" + //get the round number
-          "Press \"Enter\" to continue.";
+      return "********** Round" + message.substring(12, message.length()) + //get the round #
+          " **********"+ "\n" + "Press \"Enter\" to continue.";
     }
 
     if (message.contains("START_TURN:")) {
@@ -28,9 +28,10 @@ public class ServerMessageParser {
           "Press \"Enter\" to get your first rolled dice";
     }
 
-
-
-
+    if (message.contains("CHOOSE_DICE:")) {
+      return "Your rolled dice: " + message.substring(12, message.length()) + "\n" +
+          "Select the dice you want to re-roll or keep.";
+    }
 
 
     return "";
