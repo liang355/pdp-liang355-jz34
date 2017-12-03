@@ -8,7 +8,11 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 
 public class PlayYahtzee { //Client
+
+
+
   public static void main(String[] args) throws IOException{
+    ServerMessageParser parser = new ServerMessageParser();
     //public void runServer(String[] args) throws IOException{
 
     if (args.length != 2) {
@@ -32,6 +36,7 @@ public class PlayYahtzee { //Client
 
       while ((fromServer = in.readLine()) != null) {
         System.out.println("Server: " + fromServer);
+        System.out.println(parser.parser(fromServer)); //update
         //if (fromServer.equals("Bye.")) { //*************change later
         //  break; //*************change later
         //}
