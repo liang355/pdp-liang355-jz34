@@ -1,9 +1,44 @@
 package edu.neu.ccs.cs5010;
 
+import java.util.Arrays;
+import java.util.Map;
+
 public class ServerMessageParser {
 
+  private String[] keys = new String[] {"Aces", "Twos", "Threes", "Fours", "Fives", "Sixes", "Total",
+          "ThreeOfKind", "FourOfKind", "FullHouse", "SmallStraight", "LargeStraight", "Yahtzee", "Chance"};
 
-  public String parse(Frame serverFrame, int currentScore) {
+  private void printScores(Map<String, String> scoreMap) {
+    System.out.println("\nYOUR CURRENT SCORES:");
+
+    System.out.printf("%-30.30s  %-30.30s%n", "Upper Section", "Lower Section");
+    // the separation line
+    String separation = "----------------------";
+    System.out.printf("%-30.30s  %-30.30s%n", separation, separation);
+
+    int n = keys.length;
+    for(int i = 0, j = n/2; j < n; i++, j++) {
+      String value;
+      String leftColumn;
+      String rightColumn;
+
+      // left column
+      value = scoreMap.get(keys[i]);
+      value = value.equals("-1") ? "" : value;
+      leftColumn = "| " + String.format("%-13s", keys[i]) + " | " + String.format("%-3s", value) + "|";
+
+      // right column
+      value = scoreMap.get(keys[j]);
+      value = value.equals("-1") ? "" : value;
+      rightColumn = "| " + String.format("%-13s", keys[j]) + " | " + String.format("%-3s", value) + "|";
+
+      System.out.printf("%-30.30s  %-30.30s%n", leftColumn, rightColumn);
+      System.out.printf("%-30.30s  %-30.30s%n", separation, separation);
+    }
+    System.out.println();
+  }
+
+  public String parse(Frame serverFrame, Map<String, String> scoreMap) {
     String tag = serverFrame.getTag();
     String message = serverFrame.getMessage();
     message = message.trim();
@@ -38,10 +73,12 @@ public class ServerMessageParser {
     }
 
     if (tag.equals("CHOOSE_SCORE")) {
-      return "Select your score choice from: " + message.substring(10); //extract all choices
+      return "Your rolled dice: " + message.substring(0, 10) + "\n" +
+              "Select your score choice from: " + message.substring(10); //extract all choices
     }
 
     if (tag.equals("SCORE_CHOICE_VALID")) {
+      printScores(scoreMap);
       return "Scoring phase finished.\n" + "Press \"Enter\" to continue.";
     }
 
@@ -49,8 +86,18 @@ public class ServerMessageParser {
       return "Invalid score choice! Please choose a valid score ID from: " + message.substring(10) + "based on score board";
     }
 
+    if (tag.equals("TURN_OVER")) {
+      return "Your turn is over.\n" + "Press \"Enter\" to continue.";
+    }
+
     if (tag.equals("ROUND_OVER")) {
-      return "Current Score: " + currentScore;
+      return "Current Score: " + scoreMap.get("Total");
+    }
+
+    if (tag.equals("GAME_OVER")) {
+      System.out.println(serverFrame.toString());
+      System.out.println("Total Score: " + scoreMap.get("Total"));
+      return "";
     }
 
     return message;
