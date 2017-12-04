@@ -15,7 +15,7 @@ public class ServerMessageParser {
 
   /**
    * printScores prints a well-formatted score board.
-   * @param scoreMap score map with Key:scoreId -> Value:score.
+   * @param scoreMap score map with Key:scoreId to Value:score.
    */
   private void printScores(Map<String, String> scoreMap) {
     System.out.println("\nYOUR CURRENT SCORES:");
@@ -50,7 +50,7 @@ public class ServerMessageParser {
   /**
    * parse generates appropriate message to client based on the server frame.
    * @param serverFrame server Frame.
-   * @param scoreMap score map with Key:scoreId -> Value:score.
+   * @param scoreMap score map with Key:scoreId to Value:score.
    * @return String message.
    */
   public String parse(Frame serverFrame, Map<String, String> scoreMap) {
