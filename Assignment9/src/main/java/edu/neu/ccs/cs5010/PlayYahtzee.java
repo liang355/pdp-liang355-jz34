@@ -49,10 +49,12 @@ public class PlayYahtzee { //Client
         System.out.println(serverParser.parse(serverFrame)); //update
 
         // waiting for user input
-        Frame clientFrame = rawLineToFrame(stdIn.readLine());
+        String userInput = stdIn.readLine();
+        Frame clientFrame = new Frame("", userInput);
         while (!clientParser.isValidMessage(clientFrame, serverFrame)) {
           System.out.println("Please enter a valid input: ");
-          clientFrame = rawLineToFrame(stdIn.readLine());
+          userInput = stdIn.readLine();
+          clientFrame = new Frame("", userInput);
         }
         out.println(clientFrame.toString());
       }
