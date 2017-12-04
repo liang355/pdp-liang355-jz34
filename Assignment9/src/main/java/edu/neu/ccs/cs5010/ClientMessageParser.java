@@ -7,22 +7,21 @@ public class ClientMessageParser {
   //public static final String[] VALID_FRAME =
       //new String[]{"KEEP_DICE:","SCORE_CHOICE:","ACK:","PRINT_GAME_STATE:"};
 
-  public boolean isValidMessage(String message, String serverFlag) {
-    message = message.trim();
-    if (!serverFlag.equals("")) {
-      if (serverFlag.equals("CHOOSE_DICE")) {
-        return message.contains("KEEP_DICE");
-      }
-
-      if (serverFlag.equals("CHOOSE_SCORE")) {
-        return message.contains("SCORE_CHOICE");
-      }
+  public boolean isValidMessage(Frame clientFrame, Frame serverFrame) {
+    if (serverFrame.getTag().equals("")) {
+      return true;
     }
-//    for (String str : VALID_FRAME) {
-//      if (message.contains(str)) {
-//        return true;
-//      }
-//    }
+    if (serverFrame.getTag().equals("CHOOSE_DICE")) {
+      return clientFrame.getTag().equals("KEEP_DICE");
+    }
+
+    if (serverFrame.getTag().equals("CHOOSE_SCORE")) {
+      return clientFrame.getTag().equals("SCORE_CHOICE");
+    }
+
+    if (serverFrame.getTag().equals("SCORE_CHOICE_INVALID")) {
+      return clientFrame.getTag().equals("SCORE_CHOICE_INVALID");
+    }
     return true;
   }
 }

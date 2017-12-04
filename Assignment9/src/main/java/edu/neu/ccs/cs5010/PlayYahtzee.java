@@ -5,85 +5,56 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
-import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
 
 public class PlayYahtzee { //Client
-  public static void main(String[] args) throws IOException{
+  private Frame rawLineToFrame(String line) {
+    if(!line.contains(":")) {
+      return new Frame();
+    }
+    String[] splitedServerMessage = line.split(":\\s*?");
+    String tag = splitedServerMessage[0];
+    String message = splitedServerMessage[1];
+    return new Frame(tag, message);
+  }
 
+  private void runYahtzee(String hostName, int portNumber) {
     ServerMessageParser serverParser = new ServerMessageParser();
     ClientMessageParser clientParser = new ClientMessageParser();
 
-    boolean playerOneWin;
-
-    if (args.length != 2) {
-      System.err.println("Usage: java YahtzeeClient <host name> <port number>");
-      System.exit(1);
-    }
-
-    String hostName = args[0];
-    int portNumber = Integer.parseInt(args[1]);
-
     try (
-        Socket ySocket = new Socket(hostName, portNumber);
-        PrintWriter out = new PrintWriter(ySocket.getOutputStream(),true);
-        BufferedReader in = new BufferedReader(
-            new InputStreamReader(ySocket.getInputStream()))
+            Socket ySocket = new Socket(hostName, portNumber);
+            PrintWriter out = new PrintWriter(ySocket.getOutputStream(),true);
+            BufferedReader in = new BufferedReader(
+                    new InputStreamReader(ySocket.getInputStream()))
     ) {
       ySocket.setSoTimeout(3000); // socket SO_TIMEOUT
       BufferedReader stdIn =
-          new BufferedReader(new InputStreamReader(System.in));
-      String fromServer;
-      String fromUser;
-
-      //while ((fromServer = in.readLine()) != null) {
-      //  System.out.println("完成后删了：*****Server: " + fromServer + "*****"); //完成后删了
-
-        /*
-        different server flag requires different client frame
-        server flag ---------- client frame
-        ""          ---------- press "Enter"
-        CHOOSE_DICE ---------- KEEP_DICE
-        CHOOSE_SCORE---------- SCORE_CHOICE
-        */
-
-        //String serverFlag = "";
-        //System.out.println(serverParser.parser(fromServer, serverFlag)); //update
+              new BufferedReader(new InputStreamReader(System.in));
 
       while (true) {
+//        try {
+//          fromServer = in.readLine();
+//        } catch (SocketTimeoutException stoe) {
+//          fromServer = "server not responding with your request ... Try another one";
+//        }
+
         // waiting for server response
-        try {
-          fromServer = in.readLine();
-        } catch (SocketTimeoutException stoe) {
-          fromServer = "server not responding with your request ... Try another one";
-        }
-        // check for game over
-        if (fromServer.contains("GAME OVER")) {
-          System.out.println(fromServer);
+        Frame serverFrame = rawLineToFrame(in.readLine());
+        if (serverFrame.getTag().equals("GAME OVER")) {
+          System.out.println(serverFrame.toString());
           break;
         }
-
-        // print server message
-        String serverFlag = "";
-        System.out.println("Server: " + fromServer);
-        System.out.println(serverParser.parser(fromServer, serverFlag)); //update
+        System.out.println(serverFrame.toString());
+        System.out.println(serverParser.parse(serverFrame)); //update
 
         // waiting for user input
-        fromUser = stdIn.readLine();
-
-        while (!clientParser.isValidMessage(fromServer, serverFlag)) {
-          System.out.println("Please enter a valid choice: ");
-          fromUser = stdIn.readLine();
-//          if (fromUser != null) {
-//            System.out.println("Your input: " + fromUser);
-//            out.println(fromUser);
-//          }
+        Frame clientFrame = rawLineToFrame(stdIn.readLine());
+        while (!clientParser.isValidMessage(clientFrame, serverFrame)) {
+          System.out.println("Please enter a valid input: ");
+          clientFrame = rawLineToFrame(stdIn.readLine());
         }
-
-        System.out.println("Your input: " + fromUser);
-        out.println(fromUser);
-
-
+        out.println(clientFrame.toString());
       }
       ySocket.close();
       System.out.println("socket closed !");
@@ -94,5 +65,17 @@ public class PlayYahtzee { //Client
     } catch (IOException e) {
       System.err.println("Couldn't get I/O for the connection to " + hostName);
     }
+  }
+
+  public static void main(String[] args) throws IOException{
+    if (args.length != 2) {
+      System.err.println("Usage: java YahtzeeClient <host name> <port number>");
+      System.exit(1);
+    }
+    String hostName = args[0];
+    int portNumber = Integer.parseInt(args[1]);
+
+    PlayYahtzee game = new PlayYahtzee();
+    game.runYahtzee(hostName, portNumber);
   }
 }
