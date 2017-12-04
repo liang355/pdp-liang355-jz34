@@ -53,6 +53,8 @@ public class PlayYahtzee { //Client
         Frame clientFrame = new Frame("", userInput);
         while (!clientParser.isValidMessage(clientFrame, serverFrame)) {
           System.out.println("Please enter a valid input: ");
+          userInput = stdIn.readLine();
+          clientFrame = new Frame("", userInput);
         }
         out.println(clientFrame.toString());
       }
