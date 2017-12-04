@@ -3,7 +3,7 @@ package edu.neu.ccs.cs5010;
 public class ServerMessageParser {
 
 
-  public String parse(Frame serverFrame) {
+  public String parse(Frame serverFrame, int currentScore) {
     String tag = serverFrame.getTag();
     String message = serverFrame.getMessage();
     message = message.trim();
@@ -49,6 +49,9 @@ public class ServerMessageParser {
       return "Invalid score choice! Please choose a valid score ID from: " + message.substring(10) + "based on score board";
     }
 
+    if (tag.equals("ROUND_OVER")) {
+      return "Current Score: " + currentScore;
+    }
 
     return message;
 

@@ -32,6 +32,8 @@ public class PlayYahtzee { //Client
       BufferedReader stdIn =
               new BufferedReader(new InputStreamReader(System.in));
 
+      int currentScore = 0; //当前得分
+
       while (true) {
 //        try {
 //          fromServer = in.readLine();
@@ -43,10 +45,20 @@ public class PlayYahtzee { //Client
         Frame serverFrame = rawLineToFrame(in.readLine());
         if (serverFrame.getTag().equals("GAME OVER")) {
           System.out.println(serverFrame.toString());
+          System.out.println("Total Score: " + currentScore);
           break;
         }
+
+        //获取并保存当前得分
+        if (serverFrame.getTag().equals("SCORE_CHOICE_VALID")) {
+          int startIndex = serverFrame.getMessage().indexOf("Total ") + 6;
+          int endIndex = serverFrame.getMessage().length();
+          String score = serverFrame.getMessage().substring(startIndex, endIndex);
+          currentScore = Integer.valueOf(score);
+        }
+
         System.out.println(serverFrame.toString());
-        System.out.println(serverParser.parse(serverFrame)); //update
+        System.out.println(serverParser.parse(serverFrame, currentScore)); //update
 
         // waiting for user input
         String userInput = stdIn.readLine();
