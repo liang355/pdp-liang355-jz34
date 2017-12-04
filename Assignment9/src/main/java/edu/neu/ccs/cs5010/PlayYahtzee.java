@@ -28,7 +28,7 @@ public class PlayYahtzee { //Client
             BufferedReader in = new BufferedReader(
                     new InputStreamReader(ySocket.getInputStream()))
     ) {
-      ySocket.setSoTimeout(3000); // socket SO_TIMEOUT
+      //ySocket.setSoTimeout(3000); // socket SO_TIMEOUT
       BufferedReader stdIn =
               new BufferedReader(new InputStreamReader(System.in));
 
