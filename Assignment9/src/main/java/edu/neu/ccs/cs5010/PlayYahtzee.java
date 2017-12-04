@@ -9,8 +9,24 @@ import java.net.UnknownHostException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class PlayYahtzee { //Client
+
+/**
+ * PlayYahtzee is a client application to be used to connect an
+ * already-written server application, implementing the given
+ * game protocol.
+ */
+public class PlayYahtzee {
+  // score ID -> current score
+  Map<String, String> scoreMap = new HashMap<>();
+
+  /**
+   * rawLineToFrame converts the a given line of message
+   * into a frame which consists of a tag and a payload.
+   * @param line input line message
+   * @return a Frame consists of a tag and a payloard
+   */
   private Frame rawLineToFrame(String line) {
+    //when line is empty or the payload is empty
     if(!line.contains(":") || line.indexOf(":") == line.length()-1) {
       return new Frame();
     }
@@ -20,6 +36,12 @@ public class PlayYahtzee { //Client
     return new Frame(tag, message);
   }
 
+  /**
+   * runYahtzee connects with the server with given hostName and
+   * portNumber.
+   * @param hostName hostName
+   * @param portNumber portNumber
+   */
   private void runYahtzee(String hostName, int portNumber) {
     ServerMessageParser serverParser = new ServerMessageParser();
     ClientMessageParser clientParser = new ClientMessageParser();
@@ -32,22 +54,22 @@ public class PlayYahtzee { //Client
     ) {
       BufferedReader stdIn =
               new BufferedReader(new InputStreamReader(System.in));
-      Map<String, String> scoreMap = new HashMap<>();
 
       while (true) {
-        // waiting for server response
         Frame serverFrame = rawLineToFrame(in.readLine());
 
-        //Get and save current scores
+        // Get and save current scores
         if (serverFrame.getTag().equals("SCORE_CHOICE_VALID")) {
-          String[] brackets = serverFrame.getMessage().split("\\s");
+          String[] brackets = serverFrame.getPayload().split("\\s");
           for(int i = 0; i < 14; i++) {
             scoreMap.put(brackets[2 * i], brackets[2 * i + 1]);
           }
         }
 
-        //update
+        // parse the serverFrame
         System.out.println(serverParser.parse(serverFrame, scoreMap));
+
+        //Terminate the game then servers sends "GAME_OVER" tag
         if (serverFrame.getTag().equals("GAME_OVER")) {
           break;
         }
@@ -55,6 +77,8 @@ public class PlayYahtzee { //Client
         // waiting for user input
         String userInput = stdIn.readLine();
         Frame clientFrame = new Frame("", userInput);
+
+        // check whether user input complies to the protocol
         while (!clientParser.isValidMessage(clientFrame, serverFrame)) {
           System.out.println("Please enter a valid input: ");
           userInput = stdIn.readLine();
@@ -63,7 +87,7 @@ public class PlayYahtzee { //Client
         out.println(clientFrame.toString());
       }
       ySocket.close();
-      System.out.println("socket closed !");
+      //System.out.println("socket closed !");
 
     } catch (UnknownHostException e) {
       System.err.println("Don't know about host " + hostName);
@@ -73,6 +97,11 @@ public class PlayYahtzee { //Client
     }
   }
 
+  /**
+   * Starting point of the client application.
+   * @param args command-line arguments
+   * @throws IOException if I/O error happens
+   */
   public static void main(String[] args) throws IOException{
     if (args.length != 2) {
       System.err.println("Usage: java YahtzeeClient <host name> <port number>");

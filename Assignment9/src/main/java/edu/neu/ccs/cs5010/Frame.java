@@ -1,36 +1,68 @@
 package edu.neu.ccs.cs5010;
 
+/**
+ * Frame is an object to represents a tag and a payload for
+ * the game protocol of this client-server application.
+ */
 public class Frame {
-    private String tag;
-    private String message;
+  private String tag;
+  private String payload;
 
-    public Frame() {
-        this("", "");
-    }
+  /**
+   * Constructs a new frame with two empty arguments.
+   */
+  public Frame() {
+    this("", "");
+  }
 
-    public Frame(String tag, String message) {
-        this.tag = tag;
-        this.message = message;
-    }
+  /**
+   * Constructs a new frame with given tag and given payload.
+   * @param tag given tag.
+   * @param payload given payload.
+   */
+  public Frame(String tag, String payload) {
+    this.tag = tag;
+    this.payload = payload;
+  }
 
-    public String getTag() {
-        return tag;
-    }
+  /**
+   * Getter method for the tag.
+   * @return the String tag.
+   */
+  public String getTag() {
+    return tag;
+  }
 
-    public void setTag(String tag) {
-        this.tag = tag;
-    }
+  /**
+   * Setter method for the tag.
+   * @param tag to be set.
+   */
+  public void setTag(String tag) {
+    this.tag = tag;
+  }
 
-    public String getMessage() {
-        return message;
-    }
+  /**
+   * Getter method for the payload.
+   * @return the String payload.
+   */
+  public String getPayload() {
+    return payload;
+  }
 
-    public void setMessage(String message) {
-        this.message = message;
-    }
+  /**
+   * Setter method for the payload.
+   * @param payload to be set.
+   */
+  public void setPayload(String payload) {
+    this.payload = payload;
+  }
 
-    @Override
-    public String toString() {
-        return tag + ":" + message;
-    }
+  /**
+   * Overrides the toString() method.
+   * @return a String representation of the Frame.
+   */
+  @Override
+  public String toString() {
+    return tag + ":" + payload;
+  }
 }

@@ -1,13 +1,22 @@
 package edu.neu.ccs.cs5010;
 
-import java.util.Arrays;
 import java.util.Map;
 
+/**
+ * ServerMessageParser generates the appropriate message to clients
+ * based on the frame sent from server and also prints the score board.
+ */
 public class ServerMessageParser {
 
-  private String[] keys = new String[] {"Aces", "Twos", "Threes", "Fours", "Fives", "Sixes", "Total",
-          "ThreeOfKind", "FourOfKind", "FullHouse", "SmallStraight", "LargeStraight", "Yahtzee", "Chance"};
+  private static final String[] KEYS = new String[]
+      {"Aces", "Twos", "Threes", "Fours", "Fives", "Sixes", "Total",
+          "ThreeOfKind", "FourOfKind", "FullHouse", "SmallStraight",
+          "LargeStraight", "Yahtzee", "Chance"};
 
+  /**
+   * printScores prints a well-formatted score board.
+   * @param scoreMap score map with Key:scoreId -> Value:score.
+   */
   private void printScores(Map<String, String> scoreMap) {
     System.out.println("\nYOUR CURRENT SCORES:");
 
@@ -16,21 +25,21 @@ public class ServerMessageParser {
     String separation = "----------------------";
     System.out.printf("%-30.30s  %-30.30s%n", separation, separation);
 
-    int n = keys.length;
+    int n = KEYS.length;
     for(int i = 0, j = n/2; j < n; i++, j++) {
       String value;
       String leftColumn;
       String rightColumn;
 
       // left column
-      value = scoreMap.get(keys[i]);
+      value = scoreMap.get(KEYS[i]);
       value = value.equals("-1") ? "" : value;
-      leftColumn = "| " + String.format("%-13s", keys[i]) + " | " + String.format("%-3s", value) + "|";
+      leftColumn = "| " + String.format("%-13s", KEYS[i]) + " | " + String.format("%-3s", value) + "|";
 
       // right column
-      value = scoreMap.get(keys[j]);
+      value = scoreMap.get(KEYS[j]);
       value = value.equals("-1") ? "" : value;
-      rightColumn = "| " + String.format("%-13s", keys[j]) + " | " + String.format("%-3s", value) + "|";
+      rightColumn = "| " + String.format("%-13s", KEYS[j]) + " | " + String.format("%-3s", value) + "|";
 
       System.out.printf("%-30.30s  %-30.30s%n", leftColumn, rightColumn);
       System.out.printf("%-30.30s  %-30.30s%n", separation, separation);
@@ -38,9 +47,15 @@ public class ServerMessageParser {
     System.out.println();
   }
 
+  /**
+   * parse generates appropriate message to client based on the server frame.
+   * @param serverFrame server Frame.
+   * @param scoreMap score map with Key:scoreId -> Value:score.
+   * @return String message.
+   */
   public String parse(Frame serverFrame, Map<String, String> scoreMap) {
     String tag = serverFrame.getTag();
-    String message = serverFrame.getMessage();
+    String message = serverFrame.getPayload();
     message = message.trim();
     if (message.equals("Joining the game.")) {
       return "SERVER: Welcome to dice-rolling game Yahtzee!\n" +
@@ -58,8 +73,8 @@ public class ServerMessageParser {
     }
 
     if (tag.equals("START_ROUND")) {
-      return "********** Round" + message + //get the round #
-          " **********"+ "\n" + "ACTION: Press \"Enter\" to continue.";
+      return "*********************** Round " + message + //get the round #
+          " ***********************"+ "\n" + "ACTION: Press \"Enter\" to continue.";
     }
 
     if (tag.equals("START_TURN")) {
@@ -69,7 +84,10 @@ public class ServerMessageParser {
 
     if (tag.equals("CHOOSE_DICE")) {
       return "SERVER: Your rolled dice: " + message + "\n" +
-          "ACTION: Select the dice you want to re-roll or keep.";
+          "ACTION: Select the dice you want to re-roll or keep:\n" +
+          "        Use 1 to keep the dice number and 0 to re-roll the dice.\n" +
+          "        For Example: \"1 1 0 0 1\" means you want to keep the 1st " +
+          "2nd 5th dice, and re-roll third fourth dice.";
     }
 
     if (tag.equals("CHOOSE_SCORE")) {
@@ -100,8 +118,6 @@ public class ServerMessageParser {
       System.out.println("Total Score: " + scoreMap.get("Total"));
       return "";
     }
-
     return message;
-
   }
 }
