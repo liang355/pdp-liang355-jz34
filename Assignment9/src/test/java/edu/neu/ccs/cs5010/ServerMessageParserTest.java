@@ -8,6 +8,9 @@ import java.util.Map;
 
 import static org.junit.Assert.*;
 
+/**
+ * Junit test for ServerMessageParser.
+ */
 public class ServerMessageParserTest {
   ServerMessageParser test = new ServerMessageParser();
 
