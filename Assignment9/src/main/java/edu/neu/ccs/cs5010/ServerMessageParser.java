@@ -25,8 +25,8 @@ public class ServerMessageParser {
     String separation = "----------------------";
     System.out.printf("%-30.30s  %-30.30s%n", separation, separation);
 
-    int n = KEYS.length;
-    for(int i = 0, j = n/2; j < n; i++, j++) {
+    int length = KEYS.length;
+    for (int i = 0, j = length / 2; j < length; i++, j++) {
       String value;
       String leftColumn;
       String rightColumn;
@@ -34,12 +34,14 @@ public class ServerMessageParser {
       // left column
       value = scoreMap.get(KEYS[i]);
       value = value.equals("-1") ? "" : value;
-      leftColumn = "| " + String.format("%-13s", KEYS[i]) + " | " + String.format("%-3s", value) + "|";
+      leftColumn = "| " + String.format("%-13s", KEYS[i]) + " | "
+          + String.format("%-3s", value) + "|";
 
       // right column
       value = scoreMap.get(KEYS[j]);
       value = value.equals("-1") ? "" : value;
-      rightColumn = "| " + String.format("%-13s", KEYS[j]) + " | " + String.format("%-3s", value) + "|";
+      rightColumn = "| " + String.format("%-13s", KEYS[j]) + " | "
+          + String.format("%-3s", value) + "|";
 
       System.out.printf("%-30.30s  %-30.30s%n", leftColumn, rightColumn);
       System.out.printf("%-30.30s  %-30.30s%n", separation, separation);
@@ -58,41 +60,41 @@ public class ServerMessageParser {
     String message = serverFrame.getPayload();
     message = message.trim();
     if (message.equals("Joining the game.")) {
-      return "SERVER: Welcome to dice-rolling game Yahtzee!\n" +
-          "ACTION: Press \"Enter\" to continue.";
+      return "SERVER: Welcome to dice-rolling game Yahtzee!\n"
+          + "ACTION: Press \"Enter\" to continue.";
     }
 
     if (message.equals("Waiting for more players to join.")) {
-      return "SERVER: Server is waiting for another player to join.\n" +
-          "ACTION: Press \"Enter\" to continue.";
+      return "SERVER: Server is waiting for another player to join.\n"
+          + "ACTION: Press \"Enter\" to continue.";
     }
 
     if (message.equals("Game Started. Waiting for my turn.")) {
-      return "SERVER: Another player joined! Please wait for you turn to play\n" +
-          "ACTION: Press \"Enter\" to continue.";
+      return "SERVER: Another player joined! Please wait for you turn to play\n"
+          + "ACTION: Press \"Enter\" to continue.";
     }
 
     if (tag.equals("START_ROUND")) {
-      return "*********************** Round " + message + //get the round #
-          " ***********************"+ "\n" + "ACTION: Press \"Enter\" to continue.";
+      return "*********************** Round " + message //get the round #
+          + " ***********************" + "\n" + "ACTION: Press \"Enter\" to continue.";
     }
 
     if (tag.equals("START_TURN")) {
-      return "SERVER: Now it's your turn to play\n" +
-          "ACTION: Press \"Enter\" to get your first rolled dice";
+      return "SERVER: Now it's your turn to play\n"
+          + "ACTION: Press \"Enter\" to get your first rolled dice";
     }
 
     if (tag.equals("CHOOSE_DICE")) {
-      return "SERVER: Your rolled dice: " + message + "\n" +
-          "ACTION: Select the dice you want to re-roll or keep:\n" +
-          "        Use 1 to keep the dice number and 0 to re-roll the dice.\n" +
-          "        For Example: \"1 1 0 0 1\" means you want to keep the 1st " +
-          "2nd 5th dice, and re-roll third fourth dice.";
+      return "SERVER: Your rolled dice: " + message + "\n"
+          + "ACTION: Select the dice you want to re-roll or keep:\n"
+          + "        Use 1 to keep the dice number and 0 to re-roll the dice.\n"
+          + "        For Example: \"1 1 0 0 1\" means you want to keep the 1st "
+          + "2nd 5th dice, and re-roll third fourth dice.";
     }
 
     if (tag.equals("CHOOSE_SCORE")) {
-      return "SERVER: Your rolled dice: " + message.substring(0, 10) + "\n" +
-              "ACTION: Select your score choice from: " + message.substring(10);
+      return "SERVER: Your rolled dice: " + message.substring(0, 10) + "\n"
+              + "ACTION: Select your score choice from: " + message.substring(10);
     }
 
     if (tag.equals("SCORE_CHOICE_VALID")) {

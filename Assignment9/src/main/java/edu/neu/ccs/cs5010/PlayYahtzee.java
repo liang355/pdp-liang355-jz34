@@ -27,7 +27,7 @@ public class PlayYahtzee {
    */
   private Frame rawLineToFrame(String line) {
     //when line is empty or the payload is empty
-    if(!line.contains(":") || line.indexOf(":") == line.length()-1) {
+    if (!line.contains(":") || line.indexOf(":") == line.length() - 1) {
       return new Frame();
     }
     String[] splitedServerMessage = line.split(":\\s*?");
@@ -49,19 +49,19 @@ public class PlayYahtzee {
     try (
             Socket ySocket = new Socket(hostName, portNumber);
             PrintWriter out = new PrintWriter(ySocket.getOutputStream(),true);
-            BufferedReader in = new BufferedReader(
+            BufferedReader serverIn = new BufferedReader(
                     new InputStreamReader(ySocket.getInputStream()))
     ) {
       BufferedReader stdIn =
               new BufferedReader(new InputStreamReader(System.in));
 
       while (true) {
-        Frame serverFrame = rawLineToFrame(in.readLine());
+        Frame serverFrame = rawLineToFrame(serverIn.readLine());
 
         // Get and save current scores
         if (serverFrame.getTag().equals("SCORE_CHOICE_VALID")) {
           String[] brackets = serverFrame.getPayload().split("\\s");
-          for(int i = 0; i < 14; i++) {
+          for (int i = 0; i < 14; i++) {
             scoreMap.put(brackets[2 * i], brackets[2 * i + 1]);
           }
         }
@@ -102,7 +102,7 @@ public class PlayYahtzee {
    * @param args command-line arguments
    * @throws IOException if I/O error happens
    */
-  public static void main(String[] args) throws IOException{
+  public static void main(String[] args) throws IOException {
     if (args.length != 2) {
       System.err.println("Usage: java YahtzeeClient <host name> <port number>");
       System.exit(1);

@@ -13,6 +13,12 @@ public class ClientMessageParser {
   private static final Set<String> HIT_ENTER_CASES = new HashSet<>(
       Arrays.asList("SCORE_CHOICE_VALID", "START_TURN", "START_ROUND", "INFO", "TURN_OVER"));
 
+  /**
+   * isValidMessage checks whether the client message complies with given protocol.
+   * @param clientFrame client Frame.
+   * @param serverFrame server Frame.
+   * @return whether user input is valid.
+   */
   public boolean isValidMessage(Frame clientFrame, Frame serverFrame) {
     // When client wants to print game state
     if (clientFrame.getPayload().equals("print game state")) {
@@ -48,7 +54,7 @@ public class ClientMessageParser {
         int num;
         try {
           num = Integer.valueOf(str);
-        } catch(NumberFormatException e) {
+        } catch (NumberFormatException e) {
           return false;
         }
         if (num > 1 || num < 0) {
@@ -60,11 +66,12 @@ public class ClientMessageParser {
     }
 
     // When server asks clients to choose the score or re-choose the score.
-    if (serverFrame.getTag().equals("CHOOSE_SCORE") ||
-        serverFrame.getTag().equals("SCORE_CHOICE_INVALID")) {
+    if (serverFrame.getTag().equals("CHOOSE_SCORE")
+        || serverFrame.getTag().equals("SCORE_CHOICE_INVALID")) {
       clientFrame.setTag("SCORE_CHOICE");
-      List<String> list = Arrays.asList("Twos", "Fours", "SmallStraight", "FullHouse", "Yahtzee",
-              "Fives", "LargeStraight", "Aces", "Chance", "Threes", "FourOfKind", "Sixes", "ThreeOfKind");
+      List<String> list = Arrays.asList("Twos", "Fours", "SmallStraight",
+          "FullHouse", "Yahtzee", "Fives", "LargeStraight", "Aces", "Chance",
+          "Threes", "FourOfKind", "Sixes", "ThreeOfKind");
       Set<String> set = new HashSet<>(list);
       return set.contains(clientFrame.getPayload());
     }
