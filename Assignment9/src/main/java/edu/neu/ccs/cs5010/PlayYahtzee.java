@@ -9,7 +9,7 @@ import java.net.UnknownHostException;
 
 public class PlayYahtzee { //Client
   private Frame rawLineToFrame(String line) {
-    if(!line.contains(":")) {
+    if(!line.contains(":") || line.indexOf(":") == line.length()-1) {
       return new Frame();
     }
     String[] splitedServerMessage = line.split(":\\s*?");

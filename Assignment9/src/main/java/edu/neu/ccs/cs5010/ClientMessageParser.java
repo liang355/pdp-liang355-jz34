@@ -20,7 +20,7 @@ public class ClientMessageParser {
     }
 
     if (serverFrame.getTag().equals("SCORE_CHOICE_INVALID")) {
-      return clientFrame.getTag().equals("SCORE_CHOICE_INVALID");
+      return clientFrame.getTag().equals("SCORE_CHOICE");
     }
     return true;
   }
