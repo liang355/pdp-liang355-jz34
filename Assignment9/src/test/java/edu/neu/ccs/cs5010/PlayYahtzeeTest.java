@@ -5,7 +5,6 @@ import org.junit.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.net.Socket;
-import static org.mockito.Mockito.*;
 import static org.junit.Assert.*;
 
 public class PlayYahtzeeTest {
